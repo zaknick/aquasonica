@@ -13,6 +13,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         :root { --deepblue: #0c2340; --aqua: #00b4d8; --teal: #0077b6; --light: #f0f9ff; --dark: #03045e; }
         body { color: #333; line-height: 1.6; }
+
+        /* === LANGUAGE SWITCHER === */
+        .lang-bar { background: rgba(12, 35, 64, 0.95); padding: 0.5rem 1.5rem; text-align: right; position: sticky; top: 0; z-index: 100; }
+        .lang-switch { display: inline-flex; gap: 0.5rem; align-items: center; }
+        .lang-btn { background: transparent; border: 2px solid transparent; font-size: 1.4rem; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; opacity: 0.7; }
+        .lang-btn:hover, .lang-btn.active { border-color: var(--aqua); opacity: 1; background: rgba(0,180,216,0.15); }
+        .lang-btn:focus { outline: 2px solid var(--aqua); outline-offset: 2px; }
+
+        /* === ANALYTICS BAR === */
+        .analytics-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(12, 35, 64, 0.9); color: white; padding: 0.4rem 1.5rem; font-size: 0.85rem; display: flex; justify-content: space-between; z-index: 99; }
+        @media (max-width: 600px) { .analytics-bar { flex-direction: column; gap: 0.3rem; text-align: center; } }
+
         header { background: linear-gradient(135deg, var(--deepblue) 0%, var(--teal) 100%); color: white; padding: 2rem 1.5rem; position: relative; overflow: hidden; }
         .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 2rem; flex-wrap: wrap; }
         .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
@@ -46,7 +58,12 @@
         .form-group { margin-bottom: 1.5rem; text-align: left; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
         .form-group input, .form-group select { width: 100%; padding: 0.9rem; border-radius: 8px; border: none; font-size: 1rem; color: #333; }
-        footer { background: var(--deepblue); color: white; padding: 3rem 1.5rem; text-align: center; margin-top: 5rem; }
+        footer { background: var(--deepblue); color: white; padding: 3rem 1.5rem 4rem; text-align: center; margin-top: 5rem; }
+        
+        /* Language content visibility */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+
         @media (max-width: 900px) {
             .hero { grid-template-columns: 1fr; }
             .comparison { grid-template-columns: 1fr; }
@@ -56,21 +73,41 @@
 </head>
 <body>
 
+<!-- 🏁 LANGUAGE SWITCHER -->
+<div class="lang-bar">
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en" title="English">🇺🇸</button>
+        <button class="lang-btn" data-lang="es" title="Español">🇨🇴</button>
+        <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+    </div>
+</div>
+
+<!-- 📊 ANALYTICS BAR -->
+<div class="analytics-bar">
+    <span>👁️ <strong id="visitor-count">--</strong> visitors</span>
+    <span>📍 From: <strong id="visitor-country">Detecting...</strong></span>
+    <span>🌐 IP: <strong id="visitor-ip">--</strong></span>
+</div>
+
+<!-- ============================================== -->
+<!-- 🇺🇸 ENGLISH VERSION -->
+<!-- ============================================== -->
+<div class="lang-content active" data-lang="en">
 <header>
     <nav class="nav">
         <div class="logo">AQUA<span>SONICA</span></div>
         <div class="nav-links">
-            <a href="#technology">Technology</a>
-            <a href="#specs">Specifications</a>
-            <a href="#purity">Water Quality</a>
-            <a href="#order">Order</a>
+            <a href="#technology-en">Technology</a>
+            <a href="#specs-en">Specifications</a>
+            <a href="#purity-en">Water Quality</a>
+            <a href="#order-en">Order</a>
         </div>
     </nav>
     <div class="hero">
         <div class="hero-text">
             <h1>Water from Air.<br>Powered by Sound.</h1>
             <p>The next generation of atmospheric water generation. No compressor. No refrigerants. Pure water from humidity — anywhere, anytime.</p>
-            <a href="#order" class="cta-button">Pre-Order Now</a>
+            <a href="#order-en" class="cta-button">Pre-Order Now</a>
         </div>
         <div class="hero-image">
             <img src="https://github.com/zaknick/aquasonica/raw/main/hero.jpg" alt="Aquasonica DS-1500 — Atmospheric Water Generator">
@@ -78,7 +115,7 @@
     </div>
 </header>
 
-<section id="technology">
+<section id="technology-en">
     <h2>How It Works</h2>
     <div class="feature-grid">
         <div class="feature-card">
@@ -96,7 +133,7 @@
     </div>
 </section>
 
-<section id="specs">
+<section id="specs-en">
     <h2>Specifications & Performance</h2>
     <table class="specs-table">
         <tr><th>Parameter</th><th>Aquasonica DS-1500</th></tr>
@@ -109,44 +146,25 @@
         <tr><td>Dimensions</td><td>80 × 80 cm per panel</td></tr>
         <tr><td>Price</td><td>$1,200 – $1,800 USD</td></tr>
     </table>
-
     <h2 style="margin-top: 4rem;">Why We Are Different</h2>
     <div class="comparison">
-        <div class="comp-card">
-            <h3>WaterGen</h3>
-            <p class="price">$8,500+</p>
-            <p>2,800 Watts</p>
-            <p>Refrigeration system</p>
-            <p style="color: #888; margin-top: 1rem;">High power demand</p>
-        </div>
-        <div class="comp-card our">
-            <h3>✅ Aquasonica</h3>
-            <p class="price">$1,200 – $1,800</p>
-            <p>30 – 35 Watts</p>
-            <p>Ultrasonic extraction</p>
-            <p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar-ready · Zero chemicals</p>
-        </div>
-        <div class="comp-card">
-            <h3>AirWater</h3>
-            <p class="price">$9,800+</p>
-            <p>3,200 Watts</p>
-            <p>Refrigeration system</p>
-            <p style="color: #888; margin-top: 1rem;">High operating cost</p>
-        </div>
+        <div class="comp-card"><h3>WaterGen</h3><p class="price">$8,500+</p><p>2,800 Watts</p><p>Refrigeration system</p><p style="color: #888; margin-top: 1rem;">High power demand</p></div>
+        <div class="comp-card our"><h3>✅ Aquasonica</h3><p class="price">$1,200 – $1,800</p><p>30 – 35 Watts</p><p>Ultrasonic extraction</p><p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar-ready · Zero chemicals</p></div>
+        <div class="comp-card"><h3>AirWater</h3><p class="price">$9,800+</p><p>3,200 Watts</p><p>Refrigeration system</p><p style="color: #888; margin-top: 1rem;">High operating cost</p></div>
     </div>
 </section>
 
-<section id="purity">
+<section id="purity-en">
     <h2>Water Quality — Naturally Pure</h2>
     <div class="purity-box">
         <h3 style="text-align: center; color: var(--deepblue); margin-bottom: 2rem;">The Purity of Our Source</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Every other water source — rivers, wells, springs, tap — has one thing in common: it has touched the earth. Along its journey it picks up minerals, metals, salts, pesticides, fertilizers, microplastics, and treatment chemicals. By the time it reaches you, it carries the history of everything it has encountered.</p>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Every other water source — rivers, wells, springs, tap — has one thing in common: it has touched the earth. Along its journey it picks up minerals, metals, salts, pesticides, fertilizers, microplastics, and treatment chemicals.</p>
         <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem;">Our water is different. We harvest it before it ever touches the ground.</p>
         <table class="specs-table">
             <tr><th>Characteristic</th><th>Our Atmospheric Water</th></tr>
             <tr><td>Total Dissolved Solids</td><td>0 – 5 mg/L — effectively pure</td></tr>
             <tr><td>Heavy Metals</td><td>Undetectable</td></tr>
-            <tr><td>Agricultural & Industrial Contaminants</td><td>None</td></tr>
+            <tr><td>Contaminants</td><td>None</td></tr>
             <tr><td>Disinfection Byproducts</td><td>None</td></tr>
             <tr><td>Microbes & Pathogens</td><td>Zero — naturally sterile</td></tr>
             <tr><td>Microplastics</td><td>None</td></tr>
@@ -155,42 +173,312 @@
     </div>
 </section>
 
-<section id="order" class="order-section">
+<section id="order-en" class="order-section">
     <h2 style="color: white;">Pre-Order Your Aquasonica</h2>
     <p style="font-size: 1.2rem; margin-bottom: 2.5rem;">First units shipping Q4 2026. Limited initial production run.</p>
-    
     <form style="max-width: 500px; margin: 0 auto;">
-        <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <select id="quantity" name="quantity">
-                <option value="1">1 Unit — $1,500 USD</option>
-                <option value="5">5 Units — Bulk Pricing</option>
-                <option value="20">20 Units — Commercial Deployment</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="country">Delivery Country</label>
-            <input type="text" id="country" name="country" required>
-        </div>
+        <div class="form-group"><label>Full Name</label><input type="text" required></div>
+        <div class="form-group"><label>Email Address</label><input type="email" required></div>
+        <div class="form-group"><label>Quantity</label><select><option>1 Unit — $1,500 USD</option><option>5 Units — Bulk Pricing</option><option>20 Units — Commercial Deployment</option></select></div>
+        <div class="form-group"><label>Delivery Country</label><input type="text" required></div>
         <button type="submit" class="cta-button" style="width: 100%; font-size: 1.2rem;">Proceed to Payment</button>
     </form>
-    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Secure payment via Stripe / PayPal. 50% deposit required to reserve unit.</p>
+    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Secure payment via Stripe / PayPal. 50% deposit required. Full refund if cancelled.</p>
 </section>
 
 <footer>
     <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">AQUASONICA</h3>
     <p>Barranquilla, Colombia</p>
-    <p style="margin: 0.5rem 0;">contact@aquasonica.com | +57 XXX XXX XXXX</p>
+    <p style="margin: 0.5rem 0;">contact@aquasonica.com</p>
     <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Aquasonica. All rights reserved.</p>
 </footer>
+</div>
+
+<!-- ============================================== -->
+<!-- 🇨🇴 SPANISH VERSION -->
+<!-- ============================================== -->
+<div class="lang-content" data-lang="es">
+<header>
+    <nav class="nav">
+        <div class="logo">AQUA<span>SONICA</span></div>
+        <div class="nav-links">
+            <a href="#technology-es">Tecnología</a>
+            <a href="#specs-es">Especificaciones</a>
+            <a href="#purity-es">Calidad del Agua</a>
+            <a href="#order-es">Pedidos</a>
+        </div>
+    </nav>
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Agua del Aire.<br>Impulsado por Sonido.</h1>
+            <p>La nueva generación de generadores de agua atmosférica. Sin compresor. Sin refrigerantes. Agua pura de la humedad — en cualquier lugar, en cualquier momento.</p>
+            <a href="#order-es" class="cta-button">Reservar Ahora</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://github.com/zaknick/aquasonica/raw/main/hero.jpg" alt="Aquasonica DS-1500 — Generador de Agua Atmosférica">
+        </div>
+    </div>
+</header>
+
+<section id="technology-es">
+    <h2>Cómo Funciona</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Absorción</h3>
+            <p>Un compuesto especial de hidrogel de cloruro de litio absorbe el vapor de agua directamente del aire — funciona desde un 25 % de humedad relativa. Sin condensación. Sin necesidad de enfriamiento.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Extracción Ultrasónica</h3>
+            <p>Al saturarse, una onda estacionaria ultrasónica de 110 kHz genera cavitación controlada, liberando el agua del gel en menos de 2 minutos. Sin calor — solo sonido.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Diseño de Doble Cara</h3>
+            <p>Nuestro reflector móvil central duplica la producción en el mismo espacio. Un solo mecanismo barre la onda por ambas superficies, garantizando cobertura total de extracción.</p>
+        </div>
+    </div>
+</section>
+
+<section id="specs-es">
+    <h2>Especificaciones y Rendimiento</h2>
+    <table class="specs-table">
+        <tr><th>Parámetro</th><th>Aquasonica DS-1500</th></tr>
+        <tr><td>Producción Diaria</td><td>250 – 280 Litros/día</td></tr>
+        <tr><td>Consumo Eléctrico</td><td>30 – 35 Vatios</td></tr>
+        <tr><td>Alimentación</td><td>24V CC — Compatible con energía solar</td></tr>
+        <tr><td>Humedad Mínima</td><td>25 % HR</td></tr>
+        <tr><td>Refrigerantes / Químicos</td><td>Ninguno</td></tr>
+        <tr><td>Temperatura de Operación</td><td>15°C – 45°C</td></tr>
+        <tr><td>Dimensiones</td><td>80 × 80 cm por panel</td></tr>
+        <tr><td>Precio</td><td>$1.200 – $1.800 USD</td></tr>
+    </table>
+    <h2 style="margin-top: 4rem;">Por Qué Somos Diferentes</h2>
+    <div class="comparison">
+        <div class="comp-card"><h3>WaterGen</h3><p class="price">$8.500+</p><p>2.800 Vatios</p><p>Sistema de refrigeración</p><p style="color: #888; margin-top: 1rem;">Alto consumo</p></div>
+        <div class="comp-card our"><h3>✅ Aquasonica</h3><p class="price">$1.200 – $1.800</p><p>30 – 35 Vatios</p><p>Extracción ultrasónica</p><p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar · Sin químicos</p></div>
+        <div class="comp-card"><h3>AirWater</h3><p class="price">$9.800+</p><p>3.200 Vatios</p><p>Sistema de refrigeración</p><p style="color: #888; margin-top: 1rem;">Altos costos operativos</p></div>
+    </div>
+</section>
+
+<section id="purity-es">
+    <h2>Calidad del Agua — Naturalmente Pura</h2>
+    <div class="purity-box">
+        <h3 style="text-align: center; color: var(--deepblue); margin-bottom: 2rem;">La Pureza de Nuestra Fuente</h3>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Toda otra fuente de agua — ríos, pozos, manantiales, grifo — tiene algo en común: ha tocado la tierra. En su camino recoge minerales, metales, sales, pesticidas, microplásticos y productos químicos de tratamiento.</p>
+        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem;">Nuestra agua es diferente. La recolectamos antes de que toque el suelo.</p>
+        <table class="specs-table">
+            <tr><th>Característica</th><th>Nuestra Agua Atmosférica</th></tr>
+            <tr><td>Sólidos Disueltos Totales</td><td>0 – 5 mg/L — prácticamente pura</td></tr>
+            <tr><td>Metales Pesados</td><td>Indetectables</td></tr>
+            <tr><td>Contaminantes</td><td>Ninguno</td></tr>
+            <tr><td>Subproductos de Desinfección</td><td>Ninguno</td></tr>
+            <tr><td>Microbios y Patógenos</td><td>Cero — estéril naturalmente</td></tr>
+            <tr><td>Microplásticos</td><td>Ninguno</td></tr>
+        </table>
+        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: var(--teal); font-weight: 500;">"El agua más pura del mundo no está en una botella. Está en el aire que nos rodea — esperando ser recogida."</p>
+    </div>
+</section>
+
+<section id="order-es" class="order-section">
+    <h2 style="color: white;">Reserve su Aquasonica</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2.5rem;">Primeras unidades: cuarto trimestre 2026. Producción inicial limitada.</p>
+    <form style="max-width: 500px; margin: 0 auto;">
+        <div class="form-group"><label>Nombre Completo</label><input type="text" required></div>
+        <div class="form-group"><label>Correo Electrónico</label><input type="email" required></div>
+        <div class="form-group"><label>Cantidad</label><select><option>1 Unidad — $1.500 USD</option><option>5 Unidades — Precio al por mayor</option><option>20 Unidades — Despliegue comercial</option></select></div>
+        <div class="form-group"><label>País de Entrega</label><input type="text" required></div>
+        <button type="submit" class="cta-button" style="width: 100%; font-size: 1.2rem;">Proceder al Pago</button>
+    </form>
+    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Pago seguro por Stripe / PayPal. Depósito del 50 %. Reembolso total si se cancela.</p>
+</section>
+
+<footer>
+    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">AQUASONICA</h3>
+    <p>Barranquilla, Colombia</p>
+    <p style="margin: 0.5rem 0;">contacto@aquasonica.com</p>
+    <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Aquasonica. Todos los derechos reservados.</p>
+</footer>
+</div>
+
+<!-- ============================================== -->
+<!-- 🇩🇪 GERMAN VERSION -->
+<!-- ============================================== -->
+<div class="lang-content" data-lang="de">
+<header>
+    <nav class="nav">
+        <div class="logo">AQUA<span>SONICA</span></div>
+        <div class="nav-links">
+            <a href="#technology-de">Technologie</a>
+            <a href="#specs-de">Spezifikationen</a>
+            <a href="#purity-de">Wasserqualität</a>
+            <a href="#order-de">Bestellung</a>
+        </div>
+    </nav>
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Wasser aus Luft.<br>Angetrieben durch Schall.</h1>
+            <p>Die nächste Generation atmosphärischer Wassererzeugung. Ohne Kompressor. Ohne Kältemittel. Reines Wasser aus Luftfeuchtigkeit — überall und jederzeit.</p>
+            <a href="#order-de" class="cta-button">Jetzt Vorbestellen</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://github.com/zaknick/aquasonica/raw/main/hero.jpg" alt="Aquasonica DS-1500 — Atmosphärischer Wassererzeuger">
+        </div>
+    </div>
+</header>
+
+<section id="technology-de">
+    <h2>So Funktioniert Es</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Absorption</h3>
+            <p>Ein spezialisierter Lithiumchlorid-Hydrogel-Verbund absorbiert Wasserdampf direkt aus der Luft — ab 25 % relativer Luftfeuchtigkeit wirksam. Keine Kondensation erforderlich. Keine Kühlung nötig.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Ultraschall-Extraktion</h3>
+            <p>Bei Sättigung erzeugt eine präzise 110-kHz-Ultraschall-Stehwelle kontrollierte Kavitation und gibt das Wasser in unter 2 Minuten frei. Keine Hitze — nur Schall.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Doppelseitiges Design</h3>
+            <p>Unser zentraler beweglicher Reflektor verdoppelt die Leistung auf gleicher Fläche. Ein Mechanismus überstreicht beide Oberflächen und garantiert 100 % Extraktion.</p>
+        </div>
+    </div>
+</section>
+
+<section id="specs-de">
+    <h2>Technische Daten & Leistung</h2>
+    <table class="specs-table">
+        <tr><th>Parameter</th><th>Aquasonica DS-1500</th></tr>
+        <tr><td>Tägliche Wasserproduktion</td><td>250 – 280 Liter/Tag</td></tr>
+        <tr><td>Stromverbrauch</td><td>30 – 35 Watt</td></tr>
+        <tr><td>Spannungsversorgung</td><td>24V Gleichstrom — Solar kompatibel</td></tr>
+        <tr><td>Mindestluftfeuchtigkeit</td><td>25 % rF</td></tr>
+        <tr><td>Kältemittel / Chemikalien</td><td>Keine</td></tr>
+        <tr><td>Betriebstemperatur</td><td>15°C – 45°C</td></tr>
+        <tr><td>Abmessungen</td><td>80 × 80 cm pro Panel</td></tr>
+        <tr><td>Preis</td><td>1.200 – 1.800 USD</td></tr>
+    </table>
+    <h2 style="margin-top: 4rem;">Warum Wir Anders Sind</h2>
+    <div class="comparison">
+        <div class="comp-card"><h3>WaterGen</h3><p class="price">$8.500+</p><p>2.800 Watt</p><p>Kältesystem</p><p style="color: #888; margin-top: 1rem;">Hoher Energieverbrauch</p></div>
+        <div class="comp-card our"><h3>✅ Aquasonica</h3><p class="price">$1.200 – $1.800</p><p>30 – 35 Watt</p><p>Ultraschall-Extraktion</p><p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar · Ohne Chemie</p></div>
+        <div class="comp-card"><h3>AirWater</h3><p class="price">$9.800+</p><p>3.200 Watt</p><p>Kältesystem</p><p style="color: #888; margin-top: 1rem;">Hohe Betriebskosten</p></div>
+    </div>
+</section>
+
+<section id="purity-de">
+    <h2>Wasserqualität — Natürlich Rein</h2>
+    <div class="purity-box">
+        <h3 style="text-align: center; color: var(--deepblue); margin-bottom: 2rem;">Die Reinheit Unserer Quelle</h3>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Jede andere Wasserquelle — Flüsse, Brunnen, Quellen, Leitungswasser — hat eines gemeinsam: Sie hat die Erde berührt. Auf ihrem Weg nimmt sie Mineralstoffe, Metalle, Salze, Pestizide, Mikroplastik und Behandlungsmittel auf.</p>
+        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem;">Unser Wasser ist anders. Wir sammeln es, bevor es den Boden berührt.</p>
+        <table class="specs-table">
+            <tr><th>Eigenschaft</th><th>Unser Atmosphärisches Wasser</th></tr>
+            <tr><td>Gesamter gelöster Feststoffgehalt</td><td>0 – 5 mg/L — praktisch rein</td></tr>
+            <tr><td>Schwermetalle</td><td>Nicht nachweisbar</td></tr>
+            <tr><td>Schadstoffe</td><td>Keine</td></tr>
+            <tr><td>Desinfektionsnebenprodukte</td><td>Keine</td></tr>
+            <tr><td>Keime & Pathogene</td><td>Null — natürlich steril</td></tr>
+            <tr><td>Mikroplastik</td><td>Keines</td></tr>
+        </table>
+        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: var(--teal); font-weight: 500;">"Das reinste Wasser der Welt findet sich nicht in einer Flasche. Es ist in der Luft um uns herum — und wartet darauf, gesammelt zu werden."</p>
+    </div>
+</section>
+
+<section id="order-de" class="order-section">
+    <h2 style="color: white;">Aquasonica Vorbestellen</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2.5rem;">Erste Auslieferungen: Q4 2026. Begrenzte Erstauflage.</p>
+    <form style="max-width: 500px; margin: 0 auto;">
+        <div class="form-group"><label>Name</label><input type="text" required></div>
+        <div class="form-group"><label>E-Mail</label><input type="email" required></div>
+        <div class="form-group"><label>Menge</label><select><option>1 Gerät — 1.500 USD</option><option>5 Geräte — Großhandelspreis</option><option>20 Geräte — Gewerbe</option></select></div>
+        <div class="form-group"><label>Lieferland</label><input type="text" required></div>
+        <button type="submit" class="cta-button" style="width: 100%; font-size: 1.2rem;">Zur Zahlung</button>
+    </form>
+    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Sichere Zahlung via Stripe / PayPal. 50 % Anzahlung. Volle Rückerstattung bei Stornierung.</p>
+</section>
+
+<footer>
+    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">AQUASONICA</h3>
+    <p>Barranquilla, Kolumbien</p>
+    <p style="margin: 0.5rem 0;">kontakt@aquasonica.com</p>
+    <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Aquasonica. Alle Rechte vorbehalten.</p>
+</footer>
+</div>
+
+<!-- ============================================== -->
+<!-- ⚙️ JAVASCRIPT: LANGUAGE SWITCHER + ANALYTICS -->
+<!-- ============================================== -->
+<script>
+    // === 🏁 LANGUAGE SWITCHER ===
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const langContents = document.querySelectorAll('.lang-content');
+
+    function setLanguage(lang) {
+        // Update buttons
+        langButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        // Update content
+        langContents.forEach(content => {
+            content.classList.toggle('active', content.dataset.lang === lang);
+        });
+        // Save preference
+        localStorage.setItem('aquasonica_lang', lang);
+        // Update HTML lang attribute
+        document.documentElement.lang = lang;
+    }
+
+    // Button clicks
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    // Auto-detect browser language on first visit
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('aquasonica_lang');
+        if (!savedLang) {
+            const browserLang = navigator.language.substring(0, 2);
+            if (['en', 'es', 'de'].includes(browserLang)) {
+                setLanguage(browserLang);
+            }
+        } else {
+            setLanguage(savedLang);
+        }
+    });
+
+    // === 📊 SIMPLE ANALYTICS — Visitor Counter + Country/IP Detection ===
+    // Uses free API for IP & country detection
+    async function loadAnalytics() {
+        try {
+            // Get visitor data from free API
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            
+            // Update country & IP
+            document.getElementById('visitor-country').textContent = data.country_name || 'Unknown';
+            document.getElementById('visitor-ip').textContent = data.ip || 'Hidden';
+            
+            // Simple visitor counter using localStorage (increases on new session)
+            let count = parseInt(localStorage.getItem('aquasonica_visits') || '0');
+            const lastSession = sessionStorage.getItem('aquasonica_seen');
+            
+            if (!lastSession) {
+                count++;
+                sessionStorage.setItem('aquasonica_seen', 'true');
+                localStorage.setItem('aquasonica_visits', count.toString());
+            }
+            document.getElementById('visitor-count').textContent = count;
+            
+        } catch (err) {
+            document.getElementById('visitor-country').textContent = 'Unavailable';
+            document.getElementById('visitor-ip').textContent = 'Protected';
+            document.getElementById('visitor-count').textContent = 'Tracking';
+            console.log('Analytics unavailable:', err);
+        }
+    }
+
+    // Load analytics when page is ready
+    window.addEventListener('load', loadAnalytics);
+</script>
 
 </body>
 </html>
