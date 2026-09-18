@@ -1,484 +1,1290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aquasonica — Water from Air, Powered by Sound</title>
-    <meta name="description" content="Atmospheric Water Generator — 250-280 liters per day, 30-35W, no compressor, no chemicals. Pure water from humidity.">
-    <meta name="keywords" content="atmospheric water generator, water from air, humidity harvester, clean water, Colombia">
-    <meta property="og:title" content="Aquasonica — Water from Air, Powered by Sound">
-    <meta property="og:image" content="https://github.com/zaknick/aquasonica/raw/main/hero.jpg">
-    <link rel="canonical" href="https://zaknick.github.io/aquasonica/">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        :root { --deepblue: #0c2340; --aqua: #00b4d8; --teal: #0077b6; --light: #f0f9ff; --dark: #03045e; }
-        body { color: #333; line-height: 1.6; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aquasonica — Atmospheric Water Generation, Powered by Sound</title>
+<meta name="description" content="Aquasonica extracts pure drinking water from air using ultrasonic cavitation and advanced hydrogels. No compressor. No refrigerants. Works from 25% humidity. Solar-ready. From 6 L/day to 35 L/day systems for homes, farms, and communities.">
+<meta name="keywords" content="atmospheric water generator, water from air, ultrasonic water harvester, hydrogel water, PAM-LiCl, Colombia water crisis, La Guajira drought, off-grid water, solar water generator, generador de agua atmosférica, agua del aire">
+<meta name="author" content="Aquasonica">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://zaknick.github.io/aquasonica/">
 
-        /* === LANGUAGE SWITCHER === */
-        .lang-bar { background: rgba(12, 35, 64, 0.95); padding: 0.5rem 1.5rem; text-align: right; position: sticky; top: 0; z-index: 100; }
-        .lang-switch { display: inline-flex; gap: 0.5rem; align-items: center; }
-        .lang-btn { background: transparent; border: 2px solid transparent; font-size: 1.4rem; padding: 0.3rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; opacity: 0.7; }
-        .lang-btn:hover, .lang-btn.active { border-color: var(--aqua); opacity: 1; background: rgba(0,180,216,0.15); }
-        .lang-btn:focus { outline: 2px solid var(--aqua); outline-offset: 2px; }
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aquasonica — Water from Air, Powered by Sound">
+<meta property="og:description" content="Ultrasonic extraction. No compressor. No refrigerants. 25% minimum humidity. Solar-ready.">
+<meta property="og:image" content="https://zaknick.github.io/aquasonica/vortex_spectrum.jpg">
+<meta property="og:url" content="https://zaknick.github.io/aquasonica/">
 
-        /* === ANALYTICS BAR === */
-        .analytics-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(12, 35, 64, 0.9); color: white; padding: 0.4rem 1.5rem; font-size: 0.85rem; display: flex; justify-content: space-between; z-index: 99; }
-        @media (max-width: 600px) { .analytics-bar { flex-direction: column; gap: 0.3rem; text-align: center; } }
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aquasonica — Water from Air, Powered by Sound">
+<meta name="twitter:description" content="Pure water from humidity. Ultrasonic. No chemicals. Solar-ready.">
+<meta name="twitter:image" content="https://zaknick.github.io/aquasonica/vortex_spectrum.jpg">
 
-        header { background: linear-gradient(135deg, var(--deepblue) 0%, var(--teal) 100%); color: white; padding: 2rem 1.5rem; position: relative; overflow: hidden; }
-        .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 2rem; flex-wrap: wrap; }
-        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
-        .logo span { color: var(--aqua); }
-        .nav-links a { color: white; margin-left: 1.5rem; text-decoration: none; opacity: 0.9; transition: opacity 0.2s; }
-        .nav-links a:hover { opacity: 1; text-decoration: underline; }
-        .hero { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding: 2rem 0; }
-        .hero-text h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 1.5rem; }
-        .hero-text p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
-        .cta-button { display: inline-block; background: white; color: var(--deepblue); padding: 0.9rem 2.2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: none; cursor: pointer; }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.2); }
-        .hero-image { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 1rem; backdrop-filter: blur(10px); }
-        .hero-image img { width: 100%; border-radius: 12px; height: auto; }
-        section { max-width: 1200px; margin: 5rem auto; padding: 0 1.5rem; }
-        h2 { font-size: 2.2rem; color: var(--deepblue); margin-bottom: 2rem; text-align: center; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .feature-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,100,150,0.08); border-top: 4px solid var(--aqua); transition: transform 0.2s; }
-        .feature-card:hover { transform: translateY(-5px); }
-        .feature-card h3 { color: var(--teal); margin-bottom: 1rem; font-size: 1.3rem; }
-        .specs-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .specs-table th, .specs-table td { padding: 1.2rem; text-align: left; border-bottom: 1px solid #e0f2fe; }
-        .specs-table th { background: var(--deepblue); color: white; }
-        .specs-table tr:nth-child(even) { background: #f0f9ff; }
-        .comparison { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
-        .comp-card { padding: 2rem; border-radius: 12px; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center; }
-        .comp-card.our { border: 3px solid var(--aqua); transform: scale(1.05); }
-        .comp-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
-        .price { font-size: 2rem; font-weight: 800; color: var(--deepblue); margin-bottom: 0.5rem; }
-        .purity-box { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 3rem; border-radius: 16px; }
-        .order-section { background: linear-gradient(135deg, var(--deepblue) 0%, var(--teal) 100%); color: white; padding: 4rem 2rem; border-radius: 16px; text-align: center; }
-        .form-group { margin-bottom: 1.5rem; text-align: left; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-        .form-group input, .form-group select { width: 100%; padding: 0.9rem; border-radius: 8px; border: none; font-size: 1rem; color: #333; }
-        footer { background: var(--deepblue); color: white; padding: 3rem 1.5rem 4rem; text-align: center; margin-top: 5rem; }
-        
-        /* Language content visibility */
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="vortex_spectrum.jpg">
+<link rel="apple-touch-icon" href="vortex_spectrum.jpg">
 
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; }
-            .comparison { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-        }
-    </style>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Aquasonica Atmospheric Water Generator",
+  "description": "Ultrasonic atmospheric water generator using PAM-LiCl hydrogels. Produces 6 to 35 liters of pure drinking water per day from ambient humidity.",
+  "brand": { "@type": "Brand", "name": "Aquasonica" },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "1200",
+    "highPrice": "1800",
+    "availability": "https://schema.org/PreOrder"
+  },
+  "category": "Atmospheric Water Generator"
+}
+</script>
+
+<style>
+:root {
+  --navy: #0a1929;
+  --navy-2: #0f2942;
+  --aqua: #00d4ff;
+  --aqua-2: #00b4d8;
+  --teal: #0077b6;
+  --deep: #03045e;
+  --light: #f8fcff;
+  --light-2: #e6f4fa;
+  --gray: #64748b;
+  --text: #1e293b;
+  --text-light: #475569;
+  --border: rgba(0, 180, 216, 0.15);
+  --shadow-sm: 0 1px 3px rgba(10, 25, 41, 0.08);
+  --shadow: 0 4px 20px rgba(10, 25, 41, 0.08);
+  --shadow-lg: 0 20px 50px rgba(10, 25, 41, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: var(--light);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* === NAVIGATION === */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 25, 41, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  padding: 0.9rem 2rem;
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: white;
+}
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+.brand-name span { color: var(--aqua); }
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.75);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a:hover { color: var(--aqua); }
+.nav-links a.active { color: var(--aqua); }
+
+.lang-switch {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.lang-btn:hover, .lang-btn.active {
+  border-color: var(--aqua);
+  color: var(--aqua);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+/* === HERO === */
+.hero {
+  position: relative;
+  background: radial-gradient(ellipse at top, var(--navy-2) 0%, var(--navy) 60%, var(--deep) 100%);
+  color: white;
+  padding: 6rem 2rem 5rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 119, 182, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: var(--aqua);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--aqua) 0%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2.2rem;
+  max-width: 560px;
+  font-weight: 400;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.25s;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  text-decoration: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--aqua) 0%, var(--aqua-2) 100%);
+  color: var(--navy);
+  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 212, 255, 0.5);
+}
+.btn-ghost {
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--aqua);
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.25) 0%, transparent 60%);
+  filter: blur(40px);
+  z-index: 0;
+}
+.hero-visual img {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  animation: pulse-glow 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 60px rgba(0, 212, 255, 0.4));
+}
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.3)); }
+  50% { transform: scale(1.03); filter: drop-shadow(0 0 80px rgba(0, 212, 255, 0.55)); }
+}
+
+/* === SECTIONS === */
+.section { padding: 5.5rem 2rem; }
+.section-inner { max-width: 1280px; margin: 0 auto; }
+.section-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--aqua-2);
+  margin-bottom: 0.8rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 720px;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+.title-icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 0.6rem;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+/* === CRISIS SECTION === */
+.crisis { background: var(--light-2); }
+.crisis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.crisis-stat {
+  background: white;
+  border-radius: 14px;
+  padding: 1.8rem;
+  border-left: 4px solid #ef4444;
+  box-shadow: var(--shadow);
+}
+.crisis-stat .num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #dc2626;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+.crisis-stat .label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* === SCIENCE / HOW IT WORKS === */
+.science-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.8rem;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.science-step:last-child { border-bottom: none; }
+.step-num {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+  color: var(--aqua);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 25px rgba(0, 119, 182, 0.3);
+}
+.step-content h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+}
+.step-content p {
+  color: var(--text-light);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.step-content .tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aqua-2);
+  background: rgba(0, 180, 216, 0.1);
+  padding: 0.25rem 0.7rem;
+  border-radius: 4px;
+  margin-bottom: 0.7rem;
+}
+
+/* === MODEL CARDS === */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.model-card {
+  background: white;
+  border-radius: 18px;
+  padding: 2.4rem 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.model-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--aqua);
+}
+.model-card.featured {
+  border: 2px solid var(--aqua);
+  box-shadow: 0 20px 50px rgba(0, 180, 216, 0.2);
+}
+.model-card.featured::before {
+  content: 'RECOMMENDED';
+  position: absolute;
+  top: 18px;
+  right: -32px;
+  background: var(--aqua);
+  color: var(--navy);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 2.5rem;
+  transform: rotate(45deg);
+}
+.model-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
+}
+.model-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+.model-card .model-desc {
+  font-size: 0.92rem;
+  color: var(--gray);
+  margin-bottom: 1.5rem;
+  min-height: 2.8em;
+}
+.model-spec {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.9rem;
+}
+.model-spec:last-of-type { border-bottom: none; }
+.model-spec .k { color: var(--gray); font-weight: 500; }
+.model-spec .v { color: var(--navy); font-weight: 700; }
+.model-price {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--light-2);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.model-price .amount {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+}
+.model-price .unit {
+  font-size: 0.8rem;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+/* === WATER QUALITY === */
+.purity {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--deep) 100%);
+  color: white;
+}
+.purity .section-title { color: white; }
+.purity .section-subtitle { color: rgba(255,255,255,0.7); }
+.purity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+.purity-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.85);
+}
+.purity-text p { margin-bottom: 1.2rem; }
+.purity-text .highlight {
+  color: var(--aqua);
+  font-weight: 600;
+}
+.purity-table {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 14px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+.purity-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.92rem;
+}
+.purity-row:last-child { border-bottom: none; }
+.purity-row .pk { color: rgba(255,255,255,0.65); }
+.purity-row .pv { color: var(--aqua); font-weight: 600; }
+
+/* === COMING NEXT === */
+.coming-next {
+  background: var(--light-2);
+  text-align: center;
+}
+.coming-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--navy);
+  color: var(--aqua);
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.coming-next p {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: var(--text-light);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.coming-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  text-align: left;
+}
+.coming-feature {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border-top: 3px solid var(--aqua);
+}
+.coming-feature h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+.coming-feature p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* === ORDER === */
+.order {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+  color: white;
+  text-align: center;
+}
+.order .section-title { color: white; }
+.order .section-subtitle { color: rgba(255,255,255,0.85); margin-left: auto; margin-right: auto; }
+.order-form {
+  max-width: 520px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.06);
+  padding: 2.5rem;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+.form-group { margin-bottom: 1.2rem; }
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+}
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: var(--aqua);
+  background: rgba(255,255,255,0.12);
+}
+.form-group select option { color: var(--navy); background: white; }
+
+/* === FOOTER === */
+.footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  padding: 3rem 2rem 5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+.footer-brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+.footer p { margin: 0.3rem 0; }
+
+/* === LANGUAGE VISIBILITY === */
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-visual img { max-width: 300px; margin: 0 auto; }
+  .purity-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  }
+  .menu-toggle { display: block; }
+  .science-step { grid-template-columns: 60px 1fr; gap: 1.2rem; }
+  .step-num { width: 48px; height: 48px; font-size: 1.1rem; }
+}
+@media (max-width: 600px) {
+  .section { padding: 3.5rem 1.2rem; }
+  .hero { padding: 4rem 1.2rem 3rem; }
+  .order-form { padding: 1.8rem; }
+}
+</style>
 </head>
 <body>
 
-<!-- 🏁 LANGUAGE SWITCHER -->
-<div class="lang-bar">
-    <div class="lang-switch">
-        <button class="lang-btn active" data-lang="en" title="English">🇺🇸</button>
-        <button class="lang-btn" data-lang="es" title="Español">🇨🇴</button>
-        <button class="lang-btn" data-lang="de" title="Deutsch">🇩🇪</button>
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <img src="vortex_spectrum.jpg" alt="Aquasonica cavitation vortex logo" class="brand-icon">
+      <span class="brand-name">AQUA<span>SONICA</span></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#crisis" data-i18n="nav.crisis">Crisis</a>
+      <a href="#science" data-i18n="nav.science">Science</a>
+      <a href="#models" data-i18n="nav.models">Models</a>
+      <a href="#purity" data-i18n="nav.purity">Water Quality</a>
+      <a href="#order" data-i18n="nav.order">Pre-Order</a>
     </div>
-</div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
 
-<!-- 📊 ANALYTICS BAR -->
-<div class="analytics-bar">
-    <span>👁️ <strong id="visitor-count">--</strong> visitors</span>
-    <span>📍 From: <strong id="visitor-country">Detecting...</strong></span>
-    <span>🌐 IP: <strong id="visitor-ip">--</strong></span>
-</div>
-
-<!-- ============================================== -->
-<!-- 🇺🇸 ENGLISH VERSION -->
-<!-- ============================================== -->
+<!-- ============ ENGLISH ============ -->
 <div class="lang-content active" data-lang="en">
-<header>
-    <nav class="nav">
-        <div class="logo">AQUA<span>SONICA</span></div>
-        <div class="nav-links">
-            <a href="#technology-en">Technology</a>
-            <a href="#specs-en">Specifications</a>
-            <a href="#purity-en">Water Quality</a>
-            <a href="#order-en">Order</a>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🔬 Ultrasonic Water Harvesting</div>
+        <h1>Water from Air.<br><span class="accent">Powered by Sound.</span></h1>
+        <p>Aquasonica harvests pure drinking water directly from the humidity around you — using ultrasonic cavitation and advanced hydrogels. No compressor. No refrigerants. No chemicals. Solar-ready, and effective from just 25% relative humidity.</p>
+        <div class="hero-cta">
+          <a href="#order" class="btn btn-primary">Pre-Order Now →</a>
+          <a href="#science" class="btn btn-ghost">How It Works</a>
         </div>
-    </nav>
-    <div class="hero">
-        <div class="hero-text">
-            <h1>Water from Air.<br>Powered by Sound.</h1>
-            <p>The next generation of atmospheric water generation. No compressor. No refrigerants. Pure water from humidity — anywhere, anytime.</p>
-            <a href="#order-en" class="cta-button">Pre-Order Now</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://github.com/zaknick/aquasonica/raw/main/hero.jpg" alt="Aquasonica DS-1500 — Atmospheric Water Generator">
-        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="vortex_spectrum.jpg" alt="Cavitation bubble vortex — the physics behind Aquasonica">
+      </div>
     </div>
-</header>
+  </header>
 
-<section id="technology-en">
-    <h2>How It Works</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Absorption</h3>
-            <p>A specialized lithium chloride hydrogel composite absorbs water vapor directly from the air — effective from 25% relative humidity upward. No condensation required. No cooling needed.</p>
+  <!-- CRISIS -->
+  <section class="section crisis" id="crisis">
+    <div class="section-inner">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">A Water Crisis Hiding in Plain Sight</h2>
+      <p class="section-subtitle">Millions of people across Colombia and the Global South face daily water scarcity. Rivers run dry, reservoirs fall below 67%, and families pay up to four times the normal price for trucked water. Meanwhile, the air above them holds billions of liters of untapped water vapor.</p>
+      <div class="crisis-grid">
+        <div class="crisis-stat">
+          <div class="num">57 L/s</div>
+          <div class="label">Water inflow in Maicao vs. 600 L/s demand — just 9.5% of what the population needs.</div>
         </div>
-        <div class="feature-card">
-            <h3>Ultrasonic Extraction</h3>
-            <p>At full saturation, a precisely tuned 110 kHz ultrasonic standing wave creates controlled cavitation, mechanically releasing water from the gel in under 2 minutes. No heat — only sound.</p>
+        <div class="crisis-stat">
+          <div class="num">4.3M</div>
+          <div class="label">Colombians at risk of severe water shortages during the 2026–2027 El Niño drought.</div>
         </div>
-        <div class="feature-card">
-            <h3>Double-Sided Design</h3>
-            <p>Our central moving reflector doubles output within the same footprint. One mechanism sweeps the standing wave across both surfaces, ensuring 100% extraction coverage at all times.</p>
+        <div class="crisis-stat">
+          <div class="num">508</div>
+          <div class="label">Municipalities (45% of the country) facing documented water stress or rationing.</div>
         </div>
+        <div class="crisis-stat">
+          <div class="num">30%</div>
+          <div class="label">Reduction in Magdalena River flow — putting ~79,000 people at direct risk.</div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="specs-en">
-    <h2>Specifications & Performance</h2>
-    <table class="specs-table">
-        <tr><th>Parameter</th><th>Aquasonica DS-1500</th></tr>
-        <tr><td>Daily Water Output</td><td>250 – 280 Liters / day</td></tr>
-        <tr><td>Power Consumption</td><td>30 – 35 Watts</td></tr>
-        <tr><td>Power Supply</td><td>24V DC — Solar compatible</td></tr>
-        <tr><td>Minimum Humidity</td><td>25% RH</td></tr>
-        <tr><td>Refrigerants / Chemicals</td><td>None</td></tr>
-        <tr><td>Operating Temperature</td><td>15°C – 45°C</td></tr>
-        <tr><td>Dimensions</td><td>80 × 80 cm per panel</td></tr>
-        <tr><td>Price</td><td>$1,200 – $1,800 USD</td></tr>
-    </table>
-    <h2 style="margin-top: 4rem;">Why We Are Different</h2>
-    <div class="comparison">
-        <div class="comp-card"><h3>WaterGen</h3><p class="price">$8,500+</p><p>2,800 Watts</p><p>Refrigeration system</p><p style="color: #888; margin-top: 1rem;">High power demand</p></div>
-        <div class="comp-card our"><h3>✅ Aquasonica</h3><p class="price">$1,200 – $1,800</p><p>30 – 35 Watts</p><p>Ultrasonic extraction</p><p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar-ready · Zero chemicals</p></div>
-        <div class="comp-card"><h3>AirWater</h3><p class="price">$9,800+</p><p>3,200 Watts</p><p>Refrigeration system</p><p style="color: #888; margin-top: 1rem;">High operating cost</p></div>
+  <!-- SCIENCE -->
+  <section class="section" id="science">
+    <div class="section-inner">
+      <div class="section-label">The Breakthrough</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Sophisticated Science, Simply Explained</h2>
+      <p class="section-subtitle">Aquasonica is based on peer-reviewed research from MIT, published in <em>Nature Communications</em>. It replaces the energy-hungry compressor of traditional water generators with a much simpler idea: let the water come to us, then shake it loose with sound.</p>
+
+      <div class="science-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <span class="tag">Absorption</span>
+          <h3>The Hydrogel That Drinks the Air</h3>
+          <p>At the heart of every Aquasonica unit is a thin sheet of PAM-LiCl hydrogel — a polymer network loaded with lithium chloride salt. Lithium chloride is hygroscopic: it pulls water molecules out of the air the way a sponge pulls water off a countertop. The polymer scaffold holds the salt in place so it can be reused indefinitely. This works from as low as 25% relative humidity, where compressor-based systems fail.</p>
+        </div>
+      </div>
+
+      <div class="science-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <span class="tag">Extraction</span>
+          <h3>Sound Waves That Set the Water Free</h3>
+          <p>Once saturated, the hydrogel holds water tightly. Traditional systems use heat — slow, energy-hungry, and damaging to the gel. Aquasonica uses ultrasound instead. An ultrasonic transducer bonded to a stepped aluminum plate sends precise vibrations through the gel. Within two minutes, the mechanical energy breaks the weak bonds between water and polymer, and the water is released as liquid. No heat. No evaporation. Just sound.</p>
+        </div>
+      </div>
+
+      <div class="science-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <span class="tag">Uniform Distribution</span>
+          <h3>The Stepped Plate Secret</h3>
+          <p>A flat aluminum plate vibrates strongly at the center and weakly at the edges — leaving dead zones where water is never released. Aquasonica's plates are machined with concentric steps. Each step acts as an impedance-matching layer, taking the intense vibration from the central transducer and redistributing it evenly across the full surface. Combined with a slow frequency sweep (±2 kHz), this eliminates dead zones and achieves uniform extraction across the entire hydrogel sheet.</p>
+        </div>
+      </div>
+
+      <div class="science-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <span class="tag">Double-Sided Design</span>
+          <h3>Two Surfaces, One Mechanism</h3>
+          <p>In the Standard and Community models, two hydrogel-coated plates face each other with a shared transducer array between them. The standing wave reflects back and forth, exciting both hydrogel layers simultaneously. This doubles the active sorption area without increasing the footprint — and the shared electronics keep the cost down.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="purity-en">
-    <h2>Water Quality — Naturally Pure</h2>
-    <div class="purity-box">
-        <h3 style="text-align: center; color: var(--deepblue); margin-bottom: 2rem;">The Purity of Our Source</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Every other water source — rivers, wells, springs, tap — has one thing in common: it has touched the earth. Along its journey it picks up minerals, metals, salts, pesticides, fertilizers, microplastics, and treatment chemicals.</p>
-        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem;">Our water is different. We harvest it before it ever touches the ground.</p>
-        <table class="specs-table">
-            <tr><th>Characteristic</th><th>Our Atmospheric Water</th></tr>
-            <tr><td>Total Dissolved Solids</td><td>0 – 5 mg/L — effectively pure</td></tr>
-            <tr><td>Heavy Metals</td><td>Undetectable</td></tr>
-            <tr><td>Contaminants</td><td>None</td></tr>
-            <tr><td>Disinfection Byproducts</td><td>None</td></tr>
-            <tr><td>Microbes & Pathogens</td><td>Zero — naturally sterile</td></tr>
-            <tr><td>Microplastics</td><td>None</td></tr>
-        </table>
-        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: var(--teal); font-weight: 500;">"The purest water on earth isn't found in a bottle. It's in the air around us — waiting to be harvested."</p>
+  <!-- MODELS -->
+  <section class="section crisis" id="models">
+    <div class="section-inner">
+      <div class="section-label">Three Configurations</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Choose Your Scale</h2>
+      <p class="section-subtitle">Every Aquasonica system uses the same core technology. The difference is scale — from a household unit that fits on a countertop to a community system that serves a village. All models run on 24V DC and are solar-compatible.</p>
+
+      <div class="models-grid">
+
+        <div class="model-card">
+          <img src="vortex_spectrum.jpg" alt="" class="model-icon">
+          <h3>Prototype</h3>
+          <p class="model-desc">For field validation and pilot programs. A single 50×50 cm stepped plate with 0.25 m² of hydrogel.</p>
+          <div class="model-spec"><span class="k">Daily Output</span><span class="v">6 – 8 L</span></div>
+          <div class="model-spec"><span class="k">Power Draw</span><span class="v">10 – 15 W</span></div>
+          <div class="model-spec"><span class="k">Plate Area</span><span class="v">0.25 m²</span></div>
+          <div class="model-spec"><span class="k">Min. Humidity</span><span class="v">25% RH</span></div>
+          <div class="model-spec"><span class="k">Best For</span><span class="v">R&D, pilots</span></div>
+          <div class="model-price">
+            <span class="amount">$120 – $180</span>
+            <span class="unit">build cost</span>
+          </div>
+        </div>
+
+        <div class="model-card featured">
+          <img src="vortex_spectrum.jpg" alt="" class="model-icon">
+          <h3>Standard</h3>
+          <p class="model-desc">The household workhorse. A 1×1 m double-sided stepped plate with 1 m² of active hydrogel — enough drinking and cooking water for a family of four.</p>
+          <div class="model-spec"><span class="k">Daily Output</span><span class="v">15 – 20 L</span></div>
+          <div class="model-spec"><span class="k">Power Draw</span><span class="v">15 – 25 W</span></div>
+          <div class="model-spec"><span class="k">Plate Area</span><span class="v">1 m² (double-sided)</span></div>
+          <div class="model-spec"><span class="k">Min. Humidity</span><span class="v">25% RH</span></div>
+          <div class="model-spec"><span class="k">Best For</span><span class="v">Homes, clinics</span></div>
+          <div class="model-price">
+            <span class="amount">$250 – $350</span>
+            <span class="unit">build cost</span>
+          </div>
+        </div>
+
+        <div class="model-card">
+          <img src="vortex_spectrum.jpg" alt="" class="model-icon">
+          <h3>Community</h3>
+          <p class="model-desc">Two 1×1 m stepped plates, each double-sided, delivering 2 m² of active hydrogel. Modular: the panels can ship separately, deploy in two locations, or stack in one housing.</p>
+          <div class="model-spec"><span class="k">Daily Output</span><span class="v">25 – 35 L</span></div>
+          <div class="model-spec"><span class="k">Power Draw</span><span class="v">25 – 40 W</span></div>
+          <div class="model-spec"><span class="k">Plate Area</span><span class="v">2 × 1 m²</span></div>
+          <div class="model-spec"><span class="k">Min. Humidity</span><span class="v">25% RH</span></div>
+          <div class="model-spec"><span class="k">Best For</span><span class="v">Villages, farms</span></div>
+          <div class="model-price">
+            <span class="amount">$400 – $500</span>
+            <span class="unit">build cost</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="text-align:center; margin-top:3rem; color:var(--gray); font-size:0.92rem; max-width:720px; margin-left:auto; margin-right:auto;">
+        All models share the same core: PAM-LiCl hydrogel, ultrasonic extraction, stepped aluminum plates, 24V DC power, and zero refrigerants or chemicals. Prices shown are estimated build cost per unit at prototype scale; production pricing for pre-orders is quoted separately.
+      </p>
     </div>
-</section>
+  </section>
 
-<section id="order-en" class="order-section">
-    <h2 style="color: white;">Pre-Order Your Aquasonica</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2.5rem;">First units shipping Q4 2026. Limited initial production run.</p>
-    <form style="max-width: 500px; margin: 0 auto;">
-        <div class="form-group"><label>Full Name</label><input type="text" required></div>
-        <div class="form-group"><label>Email Address</label><input type="email" required></div>
-        <div class="form-group"><label>Quantity</label><select><option>1 Unit — $1,500 USD</option><option>5 Units — Bulk Pricing</option><option>20 Units — Commercial Deployment</option></select></div>
-        <div class="form-group"><label>Delivery Country</label><input type="text" required></div>
-        <button type="submit" class="cta-button" style="width: 100%; font-size: 1.2rem;">Proceed to Payment</button>
-    </form>
-    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Secure payment via Stripe / PayPal. 50% deposit required. Full refund if cancelled.</p>
-</section>
+  <!-- PURITY -->
+  <section class="section purity" id="purity">
+    <div class="section-inner">
+      <div class="section-label" style="color:var(--aqua);">Water Quality</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Purer Than Anything From the Ground</h2>
+      <p class="section-subtitle">Every other water source — rivers, wells, springs, tap — has touched the earth. Along the way it picks up minerals, metals, salts, pesticides, microplastics, and treatment chemicals. Our water never touches the ground.</p>
 
-<footer>
-    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">AQUASONICA</h3>
+      <div class="purity-grid">
+        <div class="purity-text">
+          <p>Because Aquasonica harvests water directly from atmospheric vapor, it starts clean. There are no dissolved minerals to remove, no agricultural runoff to filter, no treatment byproducts to worry about.</p>
+          <p><span class="highlight">The result is water so pure it needs to be remineralized for taste</span> — not purified. A trace mineral cartridge is offered as an optional add-on for households that prefer the mouthfeel of spring water.</p>
+          <p>Independent lab testing is being arranged for the first production units. We will publish full certificates of analysis as they become available.</p>
+        </div>
+        <div class="purity-table">
+          <div class="purity-row"><span class="pk">Total Dissolved Solids</span><span class="pv">0 – 5 mg/L</span></div>
+          <div class="purity-row"><span class="pk">Heavy Metals</span><span class="pv">Undetectable</span></div>
+          <div class="purity-row"><span class="pk">Pesticides & Herbicides</span><span class="pv">None</span></div>
+          <div class="purity-row"><span class="pk">Disinfection Byproducts</span><span class="pv">None</span></div>
+          <div class="purity-row"><span class="pk">Microplastics</span><span class="pv">None</span></div>
+          <div class="purity-row"><span class="pk">Bacteria & Pathogens</span><span class="pv">Zero</span></div>
+          <div class="purity-row"><span class="pk">pH</span><span class="pv">6.8 – 7.4</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING NEXT -->
+  <section class="section coming-next">
+    <div class="section-inner">
+      <div class="coming-badge">🚀 Coming Next</div>
+      <h2 class="section-title">From Water to Energy</h2>
+      <p>The same ultrasonic cavitation platform that extracts water from air can also generate heat and, in a future configuration, electricity. Cavitation bubble collapse releases intense localized energy — which can be captured and converted. We are actively developing the next generation of Aquasonica systems to deliver not just water, but power.</p>
+      <div class="coming-features">
+        <div class="coming-feature">
+          <h4>Ultrasonic Heat Generation</h4>
+          <p>Cavitation produces controlled heat without combustion. Ideal for sterilization, cooking, and space heating in off-grid settings.</p>
+        </div>
+        <div class="coming-feature">
+          <h4>Cavitation Energy Harvesting</h4>
+          <p>Capturing the pressure differential from bubble collapse using piezoelectric recovery circuits — the inverse of our extraction process.</p>
+        </div>
+        <div class="coming-feature">
+          <h4>Integrated Water + Power</h4>
+          <p>A single Aquasonica platform delivering clean water and 24V DC power from the same ultrasonic core.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="section order" id="order">
+    <div class="section-inner">
+      <div class="section-label" style="color:var(--aqua);">Reserve Your Unit</div>
+      <h2 class="section-title">Pre-Order Aquasonica</h2>
+      <p class="section-subtitle">First production units ship Q4 2026. Initial production run is limited. Reserve now with a 50% deposit — fully refundable if you cancel before shipment.</p>
+
+      <form class="order-form" onsubmit="event.preventDefault(); alert('Thank you. We will contact you at the email provided to complete your pre-order.');">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" placeholder="+57 ...">
+        </div>
+        <div class="form-group">
+          <label>Model</label>
+          <select required>
+            <option value="">Select a model</option>
+            <option>Prototype — $120–$180 build cost</option>
+            <option>Standard — $250–$350 build cost</option>
+            <option>Community — $400–$500 build cost</option>
+            <option>Custom / Commercial deployment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Delivery Region</label>
+          <input type="text" required placeholder="Department / Municipality / Country">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:1rem;">Reserve My Unit</button>
+      </form>
+
+      <p style="margin-top:1.8rem; font-size:0.85rem; color:rgba(255,255,255,0.6);">
+        Secure payment via Stripe or PayPal. For institutional buyers, municipal governments, and NGOs, contact us directly for bulk pricing and pilot program terms.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="vortex_spectrum.jpg" alt="Aquasonica">
+      AQUASONICA
+    </div>
     <p>Barranquilla, Colombia</p>
-    <p style="margin: 0.5rem 0;">contact@aquasonica.com</p>
-    <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Aquasonica. All rights reserved.</p>
-</footer>
+    <p>contact@aquasonica.com</p>
+    <p style="margin-top:1.5rem; font-size:0.82rem; opacity:0.6;">© 2026 Aquasonica. Atmospheric water generation, powered by sound.</p>
+  </footer>
+
 </div>
 
-<!-- ============================================== -->
-<!-- 🇨🇴 SPANISH VERSION -->
-<!-- ============================================== -->
+<!-- ============ SPANISH ============ -->
 <div class="lang-content" data-lang="es">
-<header>
-    <nav class="nav">
-        <div class="logo">AQUA<span>SONICA</span></div>
-        <div class="nav-links">
-            <a href="#technology-es">Tecnología</a>
-            <a href="#specs-es">Especificaciones</a>
-            <a href="#purity-es">Calidad del Agua</a>
-            <a href="#order-es">Pedidos</a>
+
+  <header class="hero" id="top-es">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🔬 Cosecha de Agua por Ultrasonido</div>
+        <h1>Agua del Aire.<br><span class="accent">Impulsada por Sonido.</span></h1>
+        <p>Aquasonica extrae agua potable pura directamente de la humedad que te rodea, utilizando cavitación ultrasónica e hidrogeles avanzados. Sin compresor. Sin refrigerantes. Sin químicos. Compatible con energía solar y efectivo desde solo 25% de humedad relativa.</p>
+        <div class="hero-cta">
+          <a href="#order-es" class="btn btn-primary">Reservar Ahora →</a>
+          <a href="#science-es" class="btn btn-ghost">Cómo Funciona</a>
         </div>
-    </nav>
-    <div class="hero">
-        <div class="hero-text">
-            <h1>Agua del Aire.<br>Impulsado por Sonido.</h1>
-            <p>La nueva generación de generadores de agua atmosférica. Sin compresor. Sin refrigerantes. Agua pura de la humedad — en cualquier lugar, en cualquier momento.</p>
-            <a href="#order-es" class="cta-button">Reservar Ahora</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://github.com/zaknick/aquasonica/raw/main/hero.jpg" alt="Aquasonica DS-1500 — Generador de Agua Atmosférica">
-        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="vortex_spectrum.jpg" alt="Burbuja de cavitación — la física detrás de Aquasonica">
+      </div>
     </div>
-</header>
+  </header>
 
-<section id="technology-es">
-    <h2>Cómo Funciona</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Absorción</h3>
-            <p>Un compuesto especial de hidrogel de cloruro de litio absorbe el vapor de agua directamente del aire — funciona desde un 25 % de humedad relativa. Sin condensación. Sin necesidad de enfriamiento.</p>
+  <section class="section crisis" id="crisis-es">
+    <div class="section-inner">
+      <div class="section-label">El Problema</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Una Crisis Hídrica a la Vista de Todos</h2>
+      <p class="section-subtitle">Millones de personas en Colombia y el Sur Global enfrentan escasez de agua a diario. Los ríos se secan, los embalses caen por debajo del 67%, y las familias pagan hasta cuatro veces el precio normal por agua en camión. Mientras tanto, el aire sobre ellas contiene miles de millones de litros de vapor de agua sin aprovechar.</p>
+      <div class="crisis-grid">
+        <div class="crisis-stat">
+          <div class="num">57 L/s</div>
+          <div class="label">Caudal de entrada de agua en Maicao frente a una demanda de 600 L/s — apenas el 9,5% de lo que necesita la población.</div>
         </div>
-        <div class="feature-card">
-            <h3>Extracción Ultrasónica</h3>
-            <p>Al saturarse, una onda estacionaria ultrasónica de 110 kHz genera cavitación controlada, liberando el agua del gel en menos de 2 minutos. Sin calor — solo sonido.</p>
+        <div class="crisis-stat">
+          <div class="num">4,3 M</div>
+          <div class="label">Colombianos en riesgo de escasez severa de agua durante la sequía de El Niño 2026–2027.</div>
         </div>
-        <div class="feature-card">
-            <h3>Diseño de Doble Cara</h3>
-            <p>Nuestro reflector móvil central duplica la producción en el mismo espacio. Un solo mecanismo barre la onda por ambas superficies, garantizando cobertura total de extracción.</p>
+        <div class="crisis-stat">
+          <div class="num">508</div>
+          <div class="label">Municipios (45% del país) enfrentando estrés hídrico documentado o racionamiento.</div>
         </div>
+        <div class="crisis-stat">
+          <div class="num">30%</div>
+          <div class="label">Reducción en el caudal del río Magdalena — poniendo a ~79.000 personas en riesgo directo.</div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="specs-es">
-    <h2>Especificaciones y Rendimiento</h2>
-    <table class="specs-table">
-        <tr><th>Parámetro</th><th>Aquasonica DS-1500</th></tr>
-        <tr><td>Producción Diaria</td><td>250 – 280 Litros/día</td></tr>
-        <tr><td>Consumo Eléctrico</td><td>30 – 35 Vatios</td></tr>
-        <tr><td>Alimentación</td><td>24V CC — Compatible con energía solar</td></tr>
-        <tr><td>Humedad Mínima</td><td>25 % HR</td></tr>
-        <tr><td>Refrigerantes / Químicos</td><td>Ninguno</td></tr>
-        <tr><td>Temperatura de Operación</td><td>15°C – 45°C</td></tr>
-        <tr><td>Dimensiones</td><td>80 × 80 cm por panel</td></tr>
-        <tr><td>Precio</td><td>$1.200 – $1.800 USD</td></tr>
-    </table>
-    <h2 style="margin-top: 4rem;">Por Qué Somos Diferentes</h2>
-    <div class="comparison">
-        <div class="comp-card"><h3>WaterGen</h3><p class="price">$8.500+</p><p>2.800 Vatios</p><p>Sistema de refrigeración</p><p style="color: #888; margin-top: 1rem;">Alto consumo</p></div>
-        <div class="comp-card our"><h3>✅ Aquasonica</h3><p class="price">$1.200 – $1.800</p><p>30 – 35 Vatios</p><p>Extracción ultrasónica</p><p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar · Sin químicos</p></div>
-        <div class="comp-card"><h3>AirWater</h3><p class="price">$9.800+</p><p>3.200 Vatios</p><p>Sistema de refrigeración</p><p style="color: #888; margin-top: 1rem;">Altos costos operativos</p></div>
+  <section class="section" id="science-es">
+    <div class="section-inner">
+      <div class="section-label">El Avance</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Ciencia Sofisticada, Explicada de Forma Sencilla</h2>
+      <p class="section-subtitle">Aquasonica se basa en investigación revisada por pares del MIT, publicada en <em>Nature Communications</em>. Reemplaza el compresor devorador de energía de los generadores tradicionales por una idea mucho más simple: dejamos que el agua venga a nosotros y luego la liberamos con sonido.</p>
+
+      <div class="science-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <span class="tag">Absorción</span>
+          <h3>El Hidrogel que Bebe del Aire</h3>
+          <p>En el corazón de cada unidad Aquasonica hay una fina lámina de hidrogel PAM-LiCl — una red de polímero cargada con sal de cloruro de litio. El cloruro de litio es higroscópico: atrae moléculas de agua del aire como una esponja atrae agua de una superficie. El andamiaje de polímero retiene la sal en su lugar para reutilizarla indefinidamente. Esto funciona desde un 25% de humedad relativa, donde los sistemas basados en compresor fallan.</p>
+        </div>
+      </div>
+
+      <div class="science-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <span class="tag">Extracción</span>
+          <h3>Ondas de Sonido que Liberan el Agua</h3>
+          <p>Una vez saturado, el hidrogel retiene el agua con fuerza. Los sistemas tradicionales usan calor — lento, costoso en energía y dañino para el gel. Aquasonica usa ultrasonido. Un transductor ultrasónico unido a una placa escalonada de aluminio envía vibraciones precisas a través del gel. En dos minutos, la energía mecánica rompe los enlaces débiles entre el agua y el polímero, y el agua se libera en forma líquida. Sin calor. Sin evaporación. Solo sonido.</p>
+        </div>
+      </div>
+
+      <div class="science-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <span class="tag">Distribución Uniforme</span>
+          <h3>El Secreto de la Placa Escalonada</h3>
+          <p>Una placa plana de aluminio vibra con fuerza en el centro y débilmente en los bordes — dejando zonas muertas donde el agua nunca se libera. Las placas de Aquasonica están mecanizadas con escalones concéntricos. Cada escalón actúa como una capa de adaptación de impedancia, tomando la vibración intensa del transductor central y redistribuyéndola uniformemente en toda la superficie. Combinado con un barrido lento de frecuencia (±2 kHz), esto elimina las zonas muertas y logra extracción uniforme en toda la lámina de hidrogel.</p>
+        </div>
+      </div>
+
+      <div class="science-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <span class="tag">Diseño de Doble Cara</span>
+          <h3>Dos Superficies, Un Mecanismo</h3>
+          <p>En los modelos Estándar y Comunitario, dos placas recubiertas de hidrogel se enfrentan con un conjunto compartido de transductores entre ellas. La onda estacionaria rebota de un lado a otro, excitando ambas capas de hidrogel simultáneamente. Esto duplica el área activa de sorción sin aumentar la huella — y la electrónica compartida mantiene el costo bajo.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="purity-es">
-    <h2>Calidad del Agua — Naturalmente Pura</h2>
-    <div class="purity-box">
-        <h3 style="text-align: center; color: var(--deepblue); margin-bottom: 2rem;">La Pureza de Nuestra Fuente</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Toda otra fuente de agua — ríos, pozos, manantiales, grifo — tiene algo en común: ha tocado la tierra. En su camino recoge minerales, metales, sales, pesticidas, microplásticos y productos químicos de tratamiento.</p>
-        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem;">Nuestra agua es diferente. La recolectamos antes de que toque el suelo.</p>
-        <table class="specs-table">
-            <tr><th>Característica</th><th>Nuestra Agua Atmosférica</th></tr>
-            <tr><td>Sólidos Disueltos Totales</td><td>0 – 5 mg/L — prácticamente pura</td></tr>
-            <tr><td>Metales Pesados</td><td>Indetectables</td></tr>
-            <tr><td>Contaminantes</td><td>Ninguno</td></tr>
-            <tr><td>Subproductos de Desinfección</td><td>Ninguno</td></tr>
-            <tr><td>Microbios y Patógenos</td><td>Cero — estéril naturalmente</td></tr>
-            <tr><td>Microplásticos</td><td>Ninguno</td></tr>
-        </table>
-        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: var(--teal); font-weight: 500;">"El agua más pura del mundo no está en una botella. Está en el aire que nos rodea — esperando ser recogida."</p>
+  <section class="section crisis" id="models-es">
+    <div class="section-inner">
+      <div class="section-label">Tres Configuraciones</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Elija su Escala</h2>
+      <p class="section-subtitle">Cada sistema Aquasonica usa la misma tecnología central. La diferencia es la escala — desde una unidad doméstica que cabe en una encimera hasta un sistema comunitario que abastece a una aldea. Todos los modelos funcionan con 24V DC y son compatibles con energía solar.</p>
+
+      <div class="models-grid">
+
+        <div class="model-card">
+          <img src="vortex_spectrum.jpg" alt="" class="model-icon">
+          <h3>Prototipo</h3>
+          <p class="model-desc">Para validación de campo y programas piloto. Una placa escalonada de 50×50 cm con 0,25 m² de hidrogel.</p>
+          <div class="model-spec"><span class="k">Producción Diaria</span><span class="v">6 – 8 L</span></div>
+          <div class="model-spec"><span class="k">Consumo</span><span class="v">10 – 15 W</span></div>
+          <div class="model-spec"><span class="k">Área de Placa</span><span class="v">0,25 m²</span></div>
+          <div class="model-spec"><span class="k">Humedad Mín.</span><span class="v">25% HR</span></div>
+          <div class="model-spec"><span class="k">Ideal Para</span><span class="v">I+D, pilotos</span></div>
+          <div class="model-price">
+            <span class="amount">$120 – $180</span>
+            <span class="unit">costo de fabricación</span>
+          </div>
+        </div>
+
+        <div class="model-card featured">
+          <img src="vortex_spectrum.jpg" alt="" class="model-icon">
+          <h3>Estándar</h3>
+          <p class="model-desc">La unidad doméstica. Una placa escalonada de doble cara de 1×1 m con 1 m² de hidrogel activo — suficiente agua para beber y cocinar para una familia de cuatro.</p>
+          <div class="model-spec"><span class="k">Producción Diaria</span><span class="v">15 – 20 L</span></div>
+          <div class="model-spec"><span class="k">Consumo</span><span class="v">15 – 25 W</span></div>
+          <div class="model-spec"><span class="k">Área de Placa</span><span class="v">1 m² (doble cara)</span></div>
+          <div class="model-spec"><span class="k">Humedad Mín.</span><span class="v">25% HR</span></div>
+          <div class="model-spec"><span class="k">Ideal Para</span><span class="v">Hogares, clínicas</span></div>
+          <div class="model-price">
+            <span class="amount">$250 – $350</span>
+            <span class="unit">costo de fabricación</span>
+          </div>
+        </div>
+
+        <div class="model-card">
+          <img src="vortex_spectrum.jpg" alt="" class="model-icon">
+          <h3>Comunitario</h3>
+          <p class="model-desc">Dos placas escalonadas de 1×1 m, cada una de doble cara, entregando 2 m² de hidrogel activo. Modular: los paneles pueden enviarse por separado, desplegarse en dos ubicaciones o apilarse en una sola carcasa.</p>
+          <div class="model-spec"><span class="k">Producción Diaria</span><span class="v">25 – 35 L</span></div>
+          <div class="model-spec"><span class="k">Consumo</span><span class="v">25 – 40 W</span></div>
+          <div class="model-spec"><span class="k">Área de Placa</span><span class="v">2 × 1 m²</span></div>
+          <div class="model-spec"><span class="k">Humedad Mín.</span><span class="v">25% HR</span></div>
+          <div class="model-spec"><span class="k">Ideal Para</span><span class="v">Aldeas, fincas</span></div>
+          <div class="model-price">
+            <span class="amount">$400 – $500</span>
+            <span class="unit">costo de fabricación</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="text-align:center; margin-top:3rem; color:var(--gray); font-size:0.92rem; max-width:720px; margin-left:auto; margin-right:auto;">
+        Todos los modelos comparten el mismo núcleo: hidrogel PAM-LiCl, extracción ultrasónica, placas escalonadas de aluminio, alimentación 24V DC, y cero refrigerantes o químicos. Los precios mostrados son costo de fabricación estimado por unidad a escala de prototipo; el precio de producción para pre-pedidos se cotiza por separado.
+      </p>
     </div>
-</section>
+  </section>
 
-<section id="order-es" class="order-section">
-    <h2 style="color: white;">Reserve su Aquasonica</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2.5rem;">Primeras unidades: cuarto trimestre 2026. Producción inicial limitada.</p>
-    <form style="max-width: 500px; margin: 0 auto;">
-        <div class="form-group"><label>Nombre Completo</label><input type="text" required></div>
-        <div class="form-group"><label>Correo Electrónico</label><input type="email" required></div>
-        <div class="form-group"><label>Cantidad</label><select><option>1 Unidad — $1.500 USD</option><option>5 Unidades — Precio al por mayor</option><option>20 Unidades — Despliegue comercial</option></select></div>
-        <div class="form-group"><label>País de Entrega</label><input type="text" required></div>
-        <button type="submit" class="cta-button" style="width: 100%; font-size: 1.2rem;">Proceder al Pago</button>
-    </form>
-    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Pago seguro por Stripe / PayPal. Depósito del 50 %. Reembolso total si se cancela.</p>
-</section>
+  <section class="section purity" id="purity-es">
+    <div class="section-inner">
+      <div class="section-label" style="color:var(--aqua);">Calidad del Agua</div>
+      <h2 class="section-title"><img src="vortex_spectrum.jpg" alt="" class="title-icon">Más Pura que Cualquier Agua del Subsuelo</h2>
+      <p class="section-subtitle">Toda otra fuente de agua — ríos, pozos, manantiales, grifo — ha tocado la tierra. En su camino recoge minerales, metales, sales, pesticidas, microplásticos y productos químicos de tratamiento. Nuestra agua nunca toca el suelo.</p>
 
-<footer>
-    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">AQUASONICA</h3>
+      <div class="purity-grid">
+        <div class="purity-text">
+          <p>Como Aquasonica cosecha agua directamente del vapor atmosférico, comienza limpia. No hay minerales disueltos que eliminar, ni escorrentía agrícola que filtrar, ni subproductos de tratamiento que preocupen.</p>
+          <p><span class="highlight">El resultado es agua tan pura que necesita remineralizarse para el sabor</span> — no purificarse. Ofrecemos un cartucho de minerales traza como accesorio opcional para hogares que prefieren la sensación de agua de manantial.</p>
+          <p>Se están gestionando pruebas de laboratorio independientes para las primeras unidades de producción. Publicaremos los certificados de análisis completos a medida que estén disponibles.</p>
+        </div>
+        <div class="purity-table">
+          <div class="purity-row"><span class="pk">Sólidos Disueltos Totales</span><span class="pv">0 – 5 mg/L</span></div>
+          <div class="purity-row"><span class="pk">Metales Pesados</span><span class="pv">Indetectables</span></div>
+          <div class="purity-row"><span class="pk">Pesticidas y Herbicidas</span><span class="pv">Ninguno</span></div>
+          <div class="purity-row"><span class="pk">Subproductos de Desinfección</span><span class="pv">Ninguno</span></div>
+          <div class="purity-row"><span class="pk">Microplásticos</span><span class="pv">Ninguno</span></div>
+          <div class="purity-row"><span class="pk">Bacterias y Patógenos</span><span class="pv">Cero</span></div>
+          <div class="purity-row"><span class="pk">pH</span><span class="pv">6,8 – 7,4</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section coming-next">
+    <div class="section-inner">
+      <div class="coming-badge">🚀 Lo que Viene</div>
+      <h2 class="section-title">Del Agua a la Energía</h2>
+      <p>La misma plataforma de cavitación ultrasónica que extrae agua del aire también puede generar calor y, en una configuración futura, electricidad. El colapso de las burbujas de cavitación libera energía localizada intensa — que puede capturarse y convertirse. Estamos desarrollando activamente la próxima generación de sistemas Aquasonica para entregar no solo agua, sino energía.</p>
+      <div class="coming-features">
+        <div class="coming-feature">
+          <h4>Generación de Calor Ultrasónico</h4>
+          <p>La cavitación produce calor controlado sin combustión. Ideal para esterilización, cocción y calefacción en entornos fuera de la red.</p>
+        </div>
+        <div class="coming-feature">
+          <h4>Cosecha de Energía por Cavitación</h4>
+          <p>Captura del diferencial de presión del colapso de burbujas usando circuitos piezoeléctricos de recuperación — el inverso de nuestro proceso de extracción.</p>
+        </div>
+        <div class="coming-feature">
+          <h4>Agua + Energía Integradas</h4>
+          <p>Una sola plataforma Aquasonica entregando agua limpia y energía de 24V DC desde el mismo núcleo ultrasónico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section order" id="order-es">
+    <div class="section-inner">
+      <div class="section-label" style="color:var(--aqua);">Reserve su Unidad</div>
+      <h2 class="section-title">Pre-Ordene su Aquasonica</h2>
+      <p class="section-subtitle">Las primeras unidades de producción se envían en el cuarto trimestre de 2026. La producción inicial es limitada. Reserve ahora con un depósito del 50% — totalmente reembolsable si cancela antes del envío.</p>
+
+      <form class="order-form" onsubmit="event.preventDefault(); alert('Gracias. Nos pondremos en contacto con usted al correo proporcionado para completar su pre-pedido.');">
+        <div class="form-group">
+          <label>Nombre Completo</label>
+          <input type="text" required placeholder="Su nombre">
+        </div>
+        <div class="form-group">
+          <label>Correo Electrónico</label>
+          <input type="email" required placeholder="usted@ejemplo.com">
+        </div>
+        <div class="form-group">
+          <label>Teléfono / WhatsApp</label>
+          <input type="tel" placeholder="+57 ...">
+        </div>
+        <div class="form-group">
+          <label>Modelo</label>
+          <select required>
+            <option value="">Seleccione un modelo</option>
+            <option>Prototipo — costo de fabricación $120–$180</option>
+            <option>Estándar — costo de fabricación $250–$350</option>
+            <option>Comunitario — costo de fabricación $400–$500</option>
+            <option>Personalizado / Despliegue comercial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Región de Entrega</label>
+          <input type="text" required placeholder="Departamento / Municipio / País">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:1rem;">Reservar mi Unidad</button>
+      </form>
+
+      <p style="margin-top:1.8rem; font-size:0.85rem; color:rgba(255,255,255,0.6);">
+        Pago seguro vía Stripe o PayPal. Para compradores institucionales, gobiernos municipales y ONG, contáctenos directamente para precios al por mayor y términos de programas piloto.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="vortex_spectrum.jpg" alt="Aquasonica">
+      AQUASONICA
+    </div>
     <p>Barranquilla, Colombia</p>
-    <p style="margin: 0.5rem 0;">contacto@aquasonica.com</p>
-    <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Aquasonica. Todos los derechos reservados.</p>
-</footer>
+    <p>contacto@aquasonica.com</p>
+    <p style="margin-top:1.5rem; font-size:0.82rem; opacity:0.6;">© 2026 Aquasonica. Generación de agua atmosférica, impulsada por sonido.</p>
+  </footer>
+
 </div>
 
-<!-- ============================================== -->
-<!-- 🇩🇪 GERMAN VERSION -->
-<!-- ============================================== -->
-<div class="lang-content" data-lang="de">
-<header>
-    <nav class="nav">
-        <div class="logo">AQUA<span>SONICA</span></div>
-        <div class="nav-links">
-            <a href="#technology-de">Technologie</a>
-            <a href="#specs-de">Spezifikationen</a>
-            <a href="#purity-de">Wasserqualität</a>
-            <a href="#order-de">Bestellung</a>
-        </div>
-    </nav>
-    <div class="hero">
-        <div class="hero-text">
-            <h1>Wasser aus Luft.<br>Angetrieben durch Schall.</h1>
-            <p>Die nächste Generation atmosphärischer Wassererzeugung. Ohne Kompressor. Ohne Kältemittel. Reines Wasser aus Luftfeuchtigkeit — überall und jederzeit.</p>
-            <a href="#order-de" class="cta-button">Jetzt Vorbestellen</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://github.com/zaknick/aquasonica/raw/main/hero.jpg" alt="Aquasonica DS-1500 — Atmosphärischer Wassererzeuger">
-        </div>
-    </div>
-</header>
-
-<section id="technology-de">
-    <h2>So Funktioniert Es</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Absorption</h3>
-            <p>Ein spezialisierter Lithiumchlorid-Hydrogel-Verbund absorbiert Wasserdampf direkt aus der Luft — ab 25 % relativer Luftfeuchtigkeit wirksam. Keine Kondensation erforderlich. Keine Kühlung nötig.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Ultraschall-Extraktion</h3>
-            <p>Bei Sättigung erzeugt eine präzise 110-kHz-Ultraschall-Stehwelle kontrollierte Kavitation und gibt das Wasser in unter 2 Minuten frei. Keine Hitze — nur Schall.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Doppelseitiges Design</h3>
-            <p>Unser zentraler beweglicher Reflektor verdoppelt die Leistung auf gleicher Fläche. Ein Mechanismus überstreicht beide Oberflächen und garantiert 100 % Extraktion.</p>
-        </div>
-    </div>
-</section>
-
-<section id="specs-de">
-    <h2>Technische Daten & Leistung</h2>
-    <table class="specs-table">
-        <tr><th>Parameter</th><th>Aquasonica DS-1500</th></tr>
-        <tr><td>Tägliche Wasserproduktion</td><td>250 – 280 Liter/Tag</td></tr>
-        <tr><td>Stromverbrauch</td><td>30 – 35 Watt</td></tr>
-        <tr><td>Spannungsversorgung</td><td>24V Gleichstrom — Solar kompatibel</td></tr>
-        <tr><td>Mindestluftfeuchtigkeit</td><td>25 % rF</td></tr>
-        <tr><td>Kältemittel / Chemikalien</td><td>Keine</td></tr>
-        <tr><td>Betriebstemperatur</td><td>15°C – 45°C</td></tr>
-        <tr><td>Abmessungen</td><td>80 × 80 cm pro Panel</td></tr>
-        <tr><td>Preis</td><td>1.200 – 1.800 USD</td></tr>
-    </table>
-    <h2 style="margin-top: 4rem;">Warum Wir Anders Sind</h2>
-    <div class="comparison">
-        <div class="comp-card"><h3>WaterGen</h3><p class="price">$8.500+</p><p>2.800 Watt</p><p>Kältesystem</p><p style="color: #888; margin-top: 1rem;">Hoher Energieverbrauch</p></div>
-        <div class="comp-card our"><h3>✅ Aquasonica</h3><p class="price">$1.200 – $1.800</p><p>30 – 35 Watt</p><p>Ultraschall-Extraktion</p><p style="color: var(--teal); font-weight: 600; margin-top: 1rem;">Solar · Ohne Chemie</p></div>
-        <div class="comp-card"><h3>AirWater</h3><p class="price">$9.800+</p><p>3.200 Watt</p><p>Kältesystem</p><p style="color: #888; margin-top: 1rem;">Hohe Betriebskosten</p></div>
-    </div>
-</section>
-
-<section id="purity-de">
-    <h2>Wasserqualität — Natürlich Rein</h2>
-    <div class="purity-box">
-        <h3 style="text-align: center; color: var(--deepblue); margin-bottom: 2rem;">Die Reinheit Unserer Quelle</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Jede andere Wasserquelle — Flüsse, Brunnen, Quellen, Leitungswasser — hat eines gemeinsam: Sie hat die Erde berührt. Auf ihrem Weg nimmt sie Mineralstoffe, Metalle, Salze, Pestizide, Mikroplastik und Behandlungsmittel auf.</p>
-        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem;">Unser Wasser ist anders. Wir sammeln es, bevor es den Boden berührt.</p>
-        <table class="specs-table">
-            <tr><th>Eigenschaft</th><th>Unser Atmosphärisches Wasser</th></tr>
-            <tr><td>Gesamter gelöster Feststoffgehalt</td><td>0 – 5 mg/L — praktisch rein</td></tr>
-            <tr><td>Schwermetalle</td><td>Nicht nachweisbar</td></tr>
-            <tr><td>Schadstoffe</td><td>Keine</td></tr>
-            <tr><td>Desinfektionsnebenprodukte</td><td>Keine</td></tr>
-            <tr><td>Keime & Pathogene</td><td>Null — natürlich steril</td></tr>
-            <tr><td>Mikroplastik</td><td>Keines</td></tr>
-        </table>
-        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: var(--teal); font-weight: 500;">"Das reinste Wasser der Welt findet sich nicht in einer Flasche. Es ist in der Luft um uns herum — und wartet darauf, gesammelt zu werden."</p>
-    </div>
-</section>
-
-<section id="order-de" class="order-section">
-    <h2 style="color: white;">Aquasonica Vorbestellen</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2.5rem;">Erste Auslieferungen: Q4 2026. Begrenzte Erstauflage.</p>
-    <form style="max-width: 500px; margin: 0 auto;">
-        <div class="form-group"><label>Name</label><input type="text" required></div>
-        <div class="form-group"><label>E-Mail</label><input type="email" required></div>
-        <div class="form-group"><label>Menge</label><select><option>1 Gerät — 1.500 USD</option><option>5 Geräte — Großhandelspreis</option><option>20 Geräte — Gewerbe</option></select></div>
-        <div class="form-group"><label>Lieferland</label><input type="text" required></div>
-        <button type="submit" class="cta-button" style="width: 100%; font-size: 1.2rem;">Zur Zahlung</button>
-    </form>
-    <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">Sichere Zahlung via Stripe / PayPal. 50 % Anzahlung. Volle Rückerstattung bei Stornierung.</p>
-</section>
-
-<footer>
-    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">AQUASONICA</h3>
-    <p>Barranquilla, Kolumbien</p>
-    <p style="margin: 0.5rem 0;">kontakt@aquasonica.com</p>
-    <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Aquasonica. Alle Rechte vorbehalten.</p>
-</footer>
-</div>
-
-<!-- ============================================== -->
-<!-- ⚙️ JAVASCRIPT: LANGUAGE SWITCHER + ANALYTICS -->
-<!-- ============================================== -->
 <script>
-    // === 🏁 LANGUAGE SWITCHER ===
-    const langButtons = document.querySelectorAll('.lang-btn');
-    const langContents = document.querySelectorAll('.lang-content');
+// === LANGUAGE SWITCHER ===
+const langButtons = document.querySelectorAll('.lang-btn');
+const langContents = document.querySelectorAll('.lang-content');
 
-    function setLanguage(lang) {
-        // Update buttons
-        langButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        // Update content
-        langContents.forEach(content => {
-            content.classList.toggle('active', content.dataset.lang === lang);
-        });
-        // Save preference
-        localStorage.setItem('aquasonica_lang', lang);
-        // Update HTML lang attribute
-        document.documentElement.lang = lang;
-    }
+function setLanguage(lang) {
+  langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+  langContents.forEach(content => content.classList.toggle('active', content.dataset.lang === lang));
+  localStorage.setItem('aquasonica_lang', lang);
+  document.documentElement.lang = lang;
+}
 
-    // Button clicks
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-    });
+langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
 
-    // Auto-detect browser language on first visit
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedLang = localStorage.getItem('aquasonica_lang');
-        if (!savedLang) {
-            const browserLang = navigator.language.substring(0, 2);
-            if (['en', 'es', 'de'].includes(browserLang)) {
-                setLanguage(browserLang);
-            }
-        } else {
-            setLanguage(savedLang);
-        }
-    });
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('aquasonica_lang');
+  if (saved) setLanguage(saved);
+  else {
+    const nav = navigator.language.substring(0, 2);
+    if (nav === 'es') setLanguage('es');
+  }
+});
 
-    // === 📊 SIMPLE ANALYTICS — Visitor Counter + Country/IP Detection ===
-    // Uses free API for IP & country detection
-    async function loadAnalytics() {
-        try {
-            // Get visitor data from free API
-            const response = await fetch('https://ipapi.co/json/');
-            const data = await response.json();
-            
-            // Update country & IP
-            document.getElementById('visitor-country').textContent = data.country_name || 'Unknown';
-            document.getElementById('visitor-ip').textContent = data.ip || 'Hidden';
-            
-            // Simple visitor counter using localStorage (increases on new session)
-            let count = parseInt(localStorage.getItem('aquasonica_visits') || '0');
-            const lastSession = sessionStorage.getItem('aquasonica_seen');
-            
-            if (!lastSession) {
-                count++;
-                sessionStorage.setItem('aquasonica_seen', 'true');
-                localStorage.setItem('aquasonica_visits', count.toString());
-            }
-            document.getElementById('visitor-count').textContent = count;
-            
-        } catch (err) {
-            document.getElementById('visitor-country').textContent = 'Unavailable';
-            document.getElementById('visitor-ip').textContent = 'Protected';
-            document.getElementById('visitor-count').textContent = 'Tracking';
-            console.log('Analytics unavailable:', err);
-        }
-    }
+// === MOBILE MENU ===
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+}
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    // Load analytics when page is ready
-    window.addEventListener('load', loadAnalytics);
+// === ACTIVE NAV LINK ===
+const sections = document.querySelectorAll('section[id], header[id]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navAnchors.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
 </script>
 
 </body>
-</html>
+    </html>
