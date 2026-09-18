@@ -26,7 +26,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -67,7 +67,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   color: var(--text);
   background: var(--light);
   line-height: 1.65;
@@ -77,6 +77,18 @@ body {
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
+
+/* Inline vortex icon — same size as surrounding text */
+.inline-vortex {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  vertical-align: -0.12em;
+  margin: 0 0.15em;
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.55);
+  object-fit: cover;
+}
 
 .nav-bar {
   position: sticky;
@@ -100,7 +112,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
   color: white;
@@ -140,7 +152,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid rgba(255,255,255,0.15);
   color: rgba(255,255,255,0.7);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   cursor: pointer;
@@ -201,14 +213,14 @@ a { color: inherit; text-decoration: none; }
   padding: 0.4rem 1rem;
   border-radius: 50px;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
 }
 .hero h1 {
   font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
@@ -237,7 +249,7 @@ a { color: inherit; text-decoration: none; }
   gap: 0.5rem;
   padding: 0.95rem 2rem;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   transition: all 0.25s;
   cursor: pointer;
@@ -305,7 +317,7 @@ a { color: inherit; text-decoration: none; }
 }
 .section-title {
   font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.025em;
   color: var(--navy);
   margin-bottom: 1rem;
@@ -344,7 +356,7 @@ a { color: inherit; text-decoration: none; }
 }
 .crisis-stat .num {
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 900;
   color: #dc2626;
   line-height: 1;
   margin-bottom: 0.5rem;
@@ -374,7 +386,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.4rem;
   box-shadow: 0 8px 25px rgba(0, 119, 182, 0.3);
 }
@@ -438,7 +450,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--aqua);
   color: var(--navy);
   font-size: 0.6rem;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.1em;
   padding: 0.35rem 2.5rem;
   transform: rotate(45deg);
@@ -483,7 +495,7 @@ a { color: inherit; text-decoration: none; }
 }
 .model-price .amount {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--navy);
   letter-spacing: -0.03em;
 }
@@ -527,7 +539,7 @@ a { color: inherit; text-decoration: none; }
 .purity-text p { margin-bottom: 1.2rem; }
 .purity-text .highlight {
   color: var(--aqua);
-  font-weight: 600;
+  font-weight: 700;
 }
 .purity-table {
   background: rgba(255,255,255,0.05);
@@ -546,7 +558,7 @@ a { color: inherit; text-decoration: none; }
 }
 .purity-row:last-child { border-bottom: none; }
 .purity-row .pk { color: rgba(255,255,255,0.75); }
-.purity-row .pv { color: var(--aqua); font-weight: 800; }
+.purity-row .pv { color: var(--aqua); font-weight: 900; }
 
 .coming-next {
   background: var(--light-2);
@@ -655,7 +667,7 @@ a { color: inherit; text-decoration: none; }
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   color: rgba(255,255,255,0.9);
 }
 .form-group input, .form-group select {
@@ -715,7 +727,7 @@ a { color: inherit; text-decoration: none; }
   gap: 0.6rem;
   margin-bottom: 1rem;
   color: white;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.2rem;
 }
 .footer-brand img {
@@ -793,7 +805,7 @@ a { color: inherit; text-decoration: none; }
     <div class="hero-inner">
       <div>
         <div class="hero-badge">🔬 Vórtice Ultrasónico</div>
-        <h1>(vortex logo) Agua Pura del Aire (vortex logo)<br><span class="accent">vía Vórtice Ultrasónico</span></h1>
+        <h1><img src="vortex_spectrum.jpg" alt="" class="inline-vortex">agua pura del aire<img src="vortex_spectrum.jpg" alt="" class="inline-vortex"><br><span class="accent">...vía vórtice ultrasónico</span></h1>
         <p>Aquasonica convierte en agua potable pura la humedad existente en el aire que te rodea todos los días. Utilizando hidrogeles higroscópicos que, por su composición molecular, absorben naturalmente grandes cantidades de humedad atmosférica, nuestros equipos extraen esa humedad acumulada a través de vórtices ultrasónicos que obligan al hidrogel a soltar su contenido en forma de agua 100% pura.</p>
         <p style="font-size:1rem; margin-top:-1rem;">Sin compresores caros de adquirir y de operar por su alto consumo de energía, mantenimiento constante, uso de refrigerantes y químicos tóxicos para el medio ambiente, nuestra tecnología consume tan poca energía que es mucho más compatible con energía solar. Y, a diferencia de la tecnología anticuada que produce agua a través de refrigeración y condensación —y que solo funciona de forma eficiente cuando hay altos niveles de humedad relativa— nuestra tecnología funciona con tan solo <strong>25% de humedad relativa</strong>.</p>
         <div class="hero-cta" style="margin-top:1.5rem;">
@@ -1144,7 +1156,7 @@ a { color: inherit; text-decoration: none; }
     <div class="hero-inner">
       <div>
         <div class="hero-badge">🔬 Ultrasonic Vortex</div>
-        <h1>(vortex logo) Pure Water from Air (vortex logo)<br><span class="accent">via Ultrasonic Vortex</span></h1>
+        <h1><img src="vortex_spectrum.jpg" alt="" class="inline-vortex">pure water from air<img src="vortex_spectrum.jpg" alt="" class="inline-vortex"><br><span class="accent">...via ultrasonic vortex</span></h1>
         <p>Aquasonica converts the humidity in the air around you into pure drinking water every day. Using hygroscopic hydrogels that naturally absorb large amounts of atmospheric moisture, our equipment extracts that accumulated humidity through ultrasonic vortices that force the hydrogel to release its content as 100% pure water.</p>
         <p style="font-size:1rem; margin-top:-1rem;">No compressors — expensive to buy and operate due to high energy consumption, constant maintenance, and use of refrigerants and chemicals toxic to the environment. Our technology uses so little energy that it is far more compatible with solar power. And unlike outdated technology that produces water through refrigeration and condensation — which only works efficiently at high relative humidity levels — our technology works at just <strong>25% relative humidity</strong>.</p>
         <div class="hero-cta" style="margin-top:1.5rem;">
