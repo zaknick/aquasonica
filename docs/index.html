@@ -5,13 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
 <title>Aquasonica — Agua del Aire, vía Vórtice Ultrasónico</title>
-<meta name="description" content="Aquasonica: hidrogel macroporoso de CaCl₂ que captura vapor atmosférico y lo libera con ultrasonido de 40 kHz. 400 L/día a 75% HR. Infraestructura permanente, consumible renovable.">
-<meta name="author" content="Aquasonica">
+<meta name="description" content="Aquasonica: hidrogel macroporoso de CaCl₂ que captura vapor atmosférico y lo libera con ultrasonido de 40 kHz. 400 L/día a 75% HR.">
 <link rel="icon" type="image/jpeg" href="vortex_spectrum.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+.intro-title {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 2.5rem;
+  text-transform: lowercase;
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6, #22c55e, #eab308, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
+}
+.intro-title-line {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  justify-content: center;
+  width: 100%;
+}
+.intro-title-line img {
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0,212,255,0.5);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.intro-lead {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--text-on-dark);
+  font-weight: 400;
+  margin-bottom: 1.6rem;
+  text-align: left;
+}
+.intro-body {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--text-on-dark);
+  margin-bottom: 1.6rem;
+  text-align: left;
+}
+.intro-body strong {
+  color: var(--heading-on-dark);
+  font-weight: 700;
+}
+.chart-container {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  position: relative;
+  height: 380px;
+}
+@media (max-width: 600px) {
+  .chart-container { height: 300px; padding: 1rem; }
+  .intro-title { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+}
+</style>
 </head>
 <body>
 
@@ -46,25 +111,21 @@
   </div>
 </nav>
 
-<!-- ============ ESPAÑOL ============ -->
+<!-- ESPAÑOL -->
 <div class="lang-content active" data-lang="es">
 
-<!-- INTRO -->
 <section class="intro" id="top">
   <div class="intro-inner">
     <h1 class="intro-title">
-      <img src="vortex_spectrum.jpg" alt="" class="inline-vortex">water from air<br>
-      via ultrasonic<br>
-      vortex
+      <span class="intro-title-line"><img src="vortex_spectrum.jpg" alt="">water from air<img src="vortex_spectrum.jpg" alt=""></span>
+      <span class="intro-title-line"><img src="vortex_spectrum.jpg" alt="">via ultrasonic<img src="vortex_spectrum.jpg" alt=""></span>
+      <span class="intro-title-line"><img src="vortex_spectrum.jpg" alt="">vortex<img src="vortex_spectrum.jpg" alt=""></span>
     </h1>
     <p class="intro-lead">Millones de seres humanos en todo el planeta sufren escasez de agua o graves problemas de calidad del agua, y sin embargo, por encima y alrededor de nosotros estamos rodeados de toneladas de vapor de agua invisible que ha estado esperando a los seres humanos correctos para desbloquear su potencial aguacero torrencial. Creemos que esa solución es nuestra solución <strong>Aqua-duct: agua del aire</strong>.</p>
 
-    <!-- IMG: Photograph of the Aqueduct Model unit in operation, or a hero shot of the hydrogel panel with condensation visible. If no photo available, use a macro shot of a hydrogel sheet (search Wikimedia Commons "polyacrylamide hydrogel"). -->
-    <figure>
-      <div class="img-placeholder img-placeholder-dark">
-        📷 [Imagen de referencia: unidad Aqueduct o macro del hidrogel]
-      </div>
-    </figure>
+    <div class="img-placeholder img-placeholder-dark">
+      📷 [Imagen de referencia: unidad Aqueduct o macro del hidrogel]
+    </div>
 
     <p class="intro-body">Su hidrogel macroporoso de cloruro de calcio bebe vapor de agua del aire como la esponja sedienta que es, luego de <strong>15 minutos</strong> la membrana se satura y cambia a su modo de desorción, liberándola en <strong>menos de 2 minutos</strong>. El tiempo total del ciclo de sorción/desorción para este hidrogel macroporoso de 2 mm y 2 metros por 2 metros es de solo <strong>15 minutos</strong> (en típica humedad relativa del 75%), completando así este ciclo <strong>96 veces al día</strong>. Así es como produce grandes cantidades de agua — eso y la corriente acústica asistida por ultrasonido, su diseño macroporoso innovador y el flujo cruzado de convección forzada con el que viene equipado el sistema.</p>
 
@@ -77,7 +138,6 @@
   </div>
 </section>
 
-<!-- HYDROGEL / CREDIBILITY -->
 <section class="section section-light" id="hydrogel">
   <div class="section-inner">
     <div class="section-label">Componente 01 — La Captura</div>
@@ -100,12 +160,9 @@
       <strong>Massachusetts Institute of Technology (MIT).</strong> El estudio de Shuvo et al., publicado en <em>Nature Communications</em> (noviembre 2025), estableció que la excitación ultrasónica a frecuencias controladas libera el agua absorbida con una fracción de la energía requerida por la desorción térmica. Usamos su marco conceptual como base de nuestro subsistema de extracción (Componente 03).
     </div>
 
-    <!-- IMG: Chemical structure diagram of PAM-LiCl hydrogel OR scanning electron micrograph of porous hydrogel structure. Search Wikimedia Commons "polyacrylamide structure" or "hydrogel SEM". MIT/Stanford press images may be reusable with attribution. -->
-    <figure>
-      <div class="img-placeholder">
-        📷 [Imagen de referencia: estructura química del hidrogel PAM-CaCl₂ o micrografía SEM de la red macroporosa]
-      </div>
-    </figure>
+    <div class="img-placeholder">
+      📷 [Imagen de referencia: estructura química del hidrogel PAM-CaCl₂ o micrografía SEM de la red macroporosa]
+    </div>
 
     <p>El hidrogel PAM-LiCl <strong>no es tóxico</strong>. El polímero de poliacrilamida es inerte una vez reticulado, y el cloruro de calcio es una sal segura utilizada en aplicaciones médicas, alimentarias y de tratamiento de agua. Al final de su vida útil, el gel usado se puede disponer como residuo general o compostar: todas las sales son completamente solubles en agua.</p>
 
@@ -113,7 +170,6 @@
   </div>
 </section>
 
-<!-- MACROPOROUS BREAKTHROUGH -->
 <section class="section section-light-alt" id="macroporous">
   <div class="section-inner">
     <div class="section-label">Nuestro Aporte — La Innovación Macroporosa</div>
@@ -128,18 +184,14 @@
 
     <p>El resultado práctico: los tiempos de sorción caen de horas a <strong>minutos</strong>. En lugar de una capa saturada externa bloqueando el acceso al interior, todo el volumen del gel contribuye al ciclo. Esto es lo que permite un ciclo completo de 15 minutos y 96 ciclos al día.</p>
 
-    <!-- IMG: Side-by-side comparison of a solid hydrogel (slow) vs macroporous hydrogel (fast) — a diagram or SEM pair. Search Wikimedia Commons "macroporous polymer" or "porous hydrogel SEM". -->
-    <figure>
-      <div class="img-placeholder">
-        📷 [Imagen de referencia: comparación entre hidrogel denso e hidrogel macroporoso, o micrografía SEM de la red porosa]
-      </div>
-    </figure>
+    <div class="img-placeholder">
+      📷 [Imagen de referencia: comparación entre hidrogel denso e hidrogel macroporoso, o micrografía SEM de la red porosa]
+    </div>
 
     </div>
   </div>
 </section>
 
-<!-- SORPTION / SONOTRODE / ACOUSTIC STREAMING -->
 <section class="section section-light" id="sorption">
   <div class="section-inner">
     <div class="section-label">Componente 03a — Sorción Asistida</div>
@@ -162,18 +214,14 @@
 
     <p>Nuestro uso de la corriente acústica está, por tanto, en línea con prácticas de ingeniería aceptadas y bien establecidas. El transductor (PZT-5H o PZT-8) y el sonotrodo de aluminio son componentes estándar del ecosistema ultrasónico industrial, fabricados por proveedores con décadas de historia en aplicaciones médicas, de limpieza y de manufactura.</p>
 
-    <!-- IMG: An ultrasonic cleaning tank in operation (cavitation bubbles) OR a sonotrode/transducer component. Search Wikimedia Commons "ultrasonic cleaning" or "ultrasonic transducer". -->
-    <figure>
-      <div class="img-placeholder">
-        📷 [Imagen de referencia: tanque de limpieza ultrasónica en operación o sonotrodo industrial]
-      </div>
-    </figure>
+    <div class="img-placeholder">
+      📷 [Imagen de referencia: tanque de limpieza ultrasónica en operación o sonotrodo industrial]
+    </div>
 
     </div>
   </div>
 </section>
 
-<!-- DESORPTION / MIT / FREQUENCY SWEEP -->
 <section class="section section-dark" id="desorption">
   <div class="section-inner">
     <div class="section-label">Componente 03b — Desorción</div>
@@ -190,18 +238,14 @@
 
     <p><strong>Sintonización automática de resonancia.</strong> La frecuencia de resonancia real de una placa de aluminio de 2 × 2 metros cambia con la temperatura, la carga de gel, y el desgaste. Un circuito de control automático rastrea continuamente la resonancia real del conjunto placa-transductor y ajusta la señal de excitación para mantenerla. El rendimiento se mantiene estable a lo largo de la vida útil del equipo.</p>
 
-    <!-- IMG: Sonotrode or ultrasonic transducer close-up with visible PZT element. Search Wikimedia Commons "ultrasonic transducer" or "PZT". -->
-    <figure>
-      <div class="img-placeholder img-placeholder-dark">
-        📷 [Imagen de referencia: sonotrodo de aluminio o transductor piezoeléctrico PZT]
-      </div>
-    </figure>
+    <div class="img-placeholder img-placeholder-dark">
+      📷 [Imagen de referencia: sonotrodo de aluminio o transductor piezoeléctrico PZT]
+    </div>
 
     </div>
   </div>
 </section>
 
-<!-- COMPARISON -->
 <section class="section section-light" id="comparison">
   <div class="section-inner section-wide">
     <div class="section-label">Comparación de Tecnologías</div>
@@ -210,70 +254,20 @@
 
     <p>La generación atmosférica convencional funciona por <em>refrigeración y condensación</em>: un compresor enfría una superficie por debajo del punto de rocío, el vapor se condensa sobre ella, y el agua se recoge. Es una tecnología de más de un siglo, y arrastra sus problemas: depende de compresores, refrigerantes, y una diferencia térmica que solo existe cuando hay mucha humedad.</p>
 
-    <table class="comparison">
-      <thead>
-        <tr>
-          <th>Criterio</th>
-          <th>Generador Convencional (Compresor)</th>
-          <th>Aquasonica (Ultrasónico)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Humedad mínima viable</td>
-          <td class="bad">50–60% HR típico. Por debajo, prácticamente no produce.</td>
-          <td class="good">25% HR. Mantiene producción útil en rangos secos.</td>
-        </tr>
-        <tr>
-          <td>Consumo eléctrico</td>
-          <td class="bad">1,500–4,000 W por unidad comercial.</td>
-          <td class="good">~130 W promedio total.</td>
-        </tr>
-        <tr>
-          <td>Energía específica</td>
-          <td class="bad">1.5–3 kWh por litro.</td>
-          <td class="good">0.3–0.8 kWh por litro.</td>
-        </tr>
-        <tr>
-          <td>Refrigerantes</td>
-          <td class="bad">Sí — gases con alto potencial de calentamiento global.</td>
-          <td class="good">Ninguno.</td>
-        </tr>
-        <tr>
-          <td>Compresor</td>
-          <td class="bad">Sí — componente de alto desgaste, mantenimiento frecuente.</td>
-          <td class="good">Ninguno.</td>
-        </tr>
-        <tr>
-          <td>Precio típico del equipo</td>
-          <td class="bad">US$15,000–60,000 para capacidades comparables.</td>
-          <td class="good"><strong>5× a 10× más económico.</strong></td>
-        </tr>
-        <tr>
-          <td>Mantenimiento</td>
-          <td class="bad">Compresor, refrigerante, filtros, higienización compleja.</td>
-          <td class="good">Grasa ultrasónica cada 2–3 meses; hidrogel renovable cada 12–18 meses. Sin técnicos especializados.</td>
-        </tr>
-        <tr>
-          <td>Compatibilidad solar</td>
-          <td class="bad">Requiere arreglo solar grande y costoso (~2–4 kW).</td>
-          <td class="good">Arreglo de ~500 Wp más batería.</td>
-        </tr>
-        <tr>
-          <td>Naturaleza del componente consumible</td>
-          <td class="bad">Refrigerante, compresor, filtros — costosos y requieren técnico certificado.</td>
-          <td class="good">Solo el hidrogel — US$10–15 por lote de 4 m². Reemplazo en sitio.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="chart-container">
+      <canvas id="comparisonChart"></canvas>
+    </div>
 
     <p>El diferencial de costo no es marginal: es <strong>de un orden de magnitud</strong>. Un generador atmosférico convencional cuesta entre US$15,000 y US$60,000 por capacidad comparable a la de un Aqueduct Model. Nuestro sistema se instala con energía solar integrada, consume una fracción de la electricidad, y el único consumible real cuesta menos que un cambio de aceite de automóvil.</p>
+
+    <p style="margin-top:1.5rem;font-size:0.85rem;color:var(--gray);">
+      <strong>Nota sobre las métricas:</strong> Los valores de consumo eléctrico, energía específica y precio son rangos típicos publicados por fabricantes de generadores atmosféricos comerciales. Para comparación directa, el Modelo Aqueduct se evalúa contra una unidad convencional de capacidad similar (~400 L/día). El precio de Aquasonica está pendiente de confirmación para el mercado colombiano.
+    </p>
 
     </div>
   </div>
 </section>
 
-<!-- COMPONENTS — DETAIL -->
 <section class="section section-light-alt" id="components">
   <div class="section-inner section-wide">
     <div class="section-label">Arquitectura Completa</div>
@@ -282,70 +276,55 @@
 
     <p style="margin-bottom:2rem;">Cada módulo de 2 × 2 metros está diseñado para servicio continuo en exteriores. La arquitectura completa se describe a continuación, componente por componente, con los detalles técnicos relevantes para evaluación pública o institucional.</p>
 
-    <!-- 01 -->
     <div class="component">
       <div class="component-head"><span class="component-num">01</span><h3>Capa de Hidrogel Macroporoso de CaCl₂</h3></div>
       <p>Hidrogel de poliacrilamida (PAM) reticulado con MBAA, cargado con cloruro de calcio dihidrato, con red macroporosa generada por lavado de cristales de NaCl (50–200 µm). El CaCl₂ absorbe vapor de agua directamente del aire desde <strong>25% de humedad relativa</strong>; los poros abiertos permiten que el aire circule a través de todo el volumen del gel, no solo sobre su superficie.</p>
       <p><strong>Área activa:</strong> 4.0 m² por módulo · <strong>Espesor:</strong> 2 mm · <strong>Masa seca:</strong> 1.8–2.0 kg · <strong>Capacidad de sorción:</strong> 2.1–2.8 g agua/g gel seco.</p>
-      <!-- IMG: Macro shot of hydrogel sheet, or SEM of macroporous structure. -->
       <div class="img-placeholder">📷 [Imagen de referencia: lámina de hidrogel o micrografía macroporosa]</div>
     </div>
 
-    <!-- 02 -->
     <div class="component">
       <div class="component-head"><span class="component-num">02</span><h3>Placa de Aluminio 6061-T6 con Recubrimiento Desprendible</h3></div>
       <p>Placa rígida de aluminio 6061-T6 de 2.0 × 2.0 m y 4 mm de espesor. Sirve como base estructural y guía de onda acústica. La superficie recibe un <strong>recubrimiento desprendible liso</strong> — no un tratamiento de unión permanente — que mantiene el hidrogel firmemente en su sitio durante la operación pero permite retirarlo completo cuando toca reemplazarlo. La placa no se daña ni se contamina: queda lista para recibir gel fresco en la misma sesión de mantenimiento, sin abrasión, sin químicos agresivos.</p>
       <p><strong>Aleación:</strong> 6061-T6 · <strong>Espesor:</strong> 4 mm · <strong>Función:</strong> rigidez estructural, distribución uniforme de vibración, superficie reutilizable.</p>
-      <!-- IMG: Aluminum plate with visible brushed surface or exploded view diagram. -->
       <div class="img-placeholder">📷 [Imagen de referencia: placa de aluminio o diagrama de la placa con hidrogel]</div>
     </div>
 
-    <!-- 03 -->
     <div class="component">
       <div class="component-head"><span class="component-num">03</span><h3>Sonotrodo Ultrasónico y Transductor — Dos Modos de Operación</h3></div>
       <p>Un solo cabezal móvil recorre el reverso de la placa. En <strong>Modo A (sorción asistida)</strong>, opera al 5–15% de su potencia nominal (~2.5–7.5 W, 0.05–0.2 W/cm²), generando corrientes acústicas que aceleran la absorción entre 30% y 40%. En <strong>Modo B (desorción)</strong>, opera a potencia plena (~50 W, >0.5 W/cm²), superando el umbral de cavitación y liberando el agua en menos de 2 minutos.</p>
       <p><strong>Frecuencia:</strong> 40 kHz · <strong>Barrido:</strong> ±2–3 kHz · <strong>Sintonización:</strong> automática a la resonancia real del conjunto · <strong>Transductor:</strong> PZT-5H o PZT-8 · <strong>Sonotrodo:</strong> aluminio o titanio, acoplado con grasa ultrasónica de alta temperatura.</p>
-      <!-- IMG: Sonotrode close-up or PZT transducer. -->
       <div class="img-placeholder">📷 [Imagen de referencia: sonotrodo o transductor PZT]</div>
     </div>
 
-    <!-- 04 -->
     <div class="component">
       <div class="component-head"><span class="component-num">04</span><h3>Mecanismo de Escaneo — Rieles y Actuador</h3></div>
       <p>Dos rieles lineales paralelos guían el carro del sonotrodo a lo largo del reverso de la placa a 5–10 mm/s. Un motor paso a paso con transmisión por correa mantiene velocidad constante. Sensores de límite y posición inicial invierten la dirección automáticamente. Resortes de presión de contacto mantienen fuerza ligera y uniforme entre sonotrodo y placa en todo el recorrido. Un solo transductor cubre los 4 m² de gel gracias a este mecanismo.</p>
       <p><strong>Recorrido completo:</strong> <2 minutos · <strong>Presión de contacto:</strong> uniforme en todo el recorrido.</p>
-      <!-- IMG: Linear rail assembly or carriage mechanism. -->
       <div class="img-placeholder">📷 [Imagen de referencia: rieles lineales o mecanismo de escaneo]</div>
     </div>
 
-    <!-- 05 -->
     <div class="component">
       <div class="component-head"><span class="component-num">05</span><h3>Sistema de Flujo de Aire Forzado — Configuración Cruzada</h3></div>
       <p>Cuatro ventiladores axiales DC de 120 × 25 mm, 24 V, montados a lo largo de un borde vertical del panel, empujan aire continuamente a través de los 2 metros de ancho del gel en una sola pasada, a <strong>2.5 m/s</strong>. Los ductos y carenados están completamente sellados contra lluvia, polvo y sol directo. Junto con la corriente acústica, este flujo cruzado es lo que permite los ciclos de 15 minutos.</p>
       <p><strong>Consumo:</strong> ~40 W · <strong>Velocidad objetivo:</strong> 2.5 m/s.</p>
-      <!-- IMG: DC axial fan or cross-flow configuration diagram. -->
       <div class="img-placeholder">📷 [Imagen de referencia: ventiladores axiales o diagrama de flujo cruzado]</div>
     </div>
 
-    <!-- 06 -->
     <div class="component">
       <div class="component-head"><span class="component-num">06</span><h3>Colector, Filtro, UV-C y Tanque de Almacenamiento</h3></div>
       <p>Una canaleta de ancho completo en el borde inferior captura el agua que drena de la superficie del gel. Pasa luego por un prefiltro de sedimentos, una etapa de desinfección UV-C, y se almacena en un tanque de polietileno grado alimenticio que previene recontaminación. Distribución por gravedad o bomba de baja potencia.</p>
       <p><strong>Nota regulatoria:</strong> el agua producida se somete a análisis de laboratorio y a un plan de monitoreo conforme a los requisitos aplicables del Decreto 1575 de 2007 y la Resolución 2115 de 2007 antes de cualquier suministro para consumo humano.</p>
-      <!-- IMG: UV-C disinfection unit or food-grade tank. -->
       <div class="img-placeholder">📷 [Imagen de referencia: lámpara UV-C o tanque grado alimenticio]</div>
     </div>
 
-    <!-- 07 -->
     <div class="component">
       <div class="component-head"><span class="component-num">07</span><h3>Carcasa, Ventilación y Compartimiento Electrónico</h3></div>
       <p>Marco estructural de acero galvanizado, pared o suelo. Carcasa exterior de aluminio estabilizado UV o plástico de alto impacto, totalmente resistente a la intemperie y con escurrimiento de agua. El compartimiento electrónico es una <strong>cámara interna sellada</strong> que aloja la placa controladora, la fuente de alimentación y el control. Un paquete desecante interno absorbe la humedad atrapada. Ventilación pasiva unidireccional con filtro de entrada y escape de presión positiva: deja salir el aire caliente mientras impide que entren humedad y lluvia. Paneles de acceso con cierres rápidos. Aisladores de vibración de caucho entre el marco y la superficie de montaje.</p>
       <p><strong>Dimensiones:</strong> 2.2 m ancho × 2.2 m alto × 0.3 m profundidad · <strong>Peso:</strong> ~50–55 kg en seco.</p>
-      <!-- IMG: Enclosure exterior or electronics compartment. -->
       <div class="img-placeholder">📷 [Imagen de referencia: carcasa o compartimiento electrónico]</div>
     </div>
 
-    <!-- 08 -->
     <div class="component">
       <div class="component-head"><span class="component-num">08</span><h3>Especificaciones de Potencia y Control</h3></div>
       <p>Entrada: <strong>24 V DC</strong>, compatible con sistemas solares fotovoltaicos y baterías de baja tensión. Consumo promedio total: <strong>~130 W</strong> (ventiladores ~40 W, ultrasónico ~90 W promedio entre ambos modos).</p>
@@ -358,7 +337,6 @@
         <li>35% HR: ~160 L/día</li>
       </ul>
       <p><strong>Mantenimiento:</strong> reaplicar grasa ultrasónica cada 2–3 meses; limpiar entradas de ventiladores trimestralmente; reemplazar el hidrogel cada 12–18 meses (costo aproximado US$10–15 por lote de 4 m²).</p>
-      <!-- IMG: Solar panel array powering the unit, or power/control schematic. -->
       <div class="img-placeholder">📷 [Imagen de referencia: panel solar o diagrama de potencia]</div>
     </div>
 
@@ -366,7 +344,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <h2 class="section-title">Hablemos de su Territorio</h2>
   <p>Atendemos alcaldías, gobernaciones, prestadores de servicios públicos, organismos de gestión del riesgo y cooperación internacional. Cada proyecto comienza con una evaluación técnica conjunta y un protocolo de demostración.</p>
@@ -382,23 +359,21 @@
 
 </div>
 
-<!-- ============ ENGLISH ============ -->
+<!-- ENGLISH -->
 <div class="lang-content" data-lang="en">
 
 <section class="intro" id="top-en">
   <div class="intro-inner">
     <h1 class="intro-title">
-      <img src="vortex_spectrum.jpg" alt="" class="inline-vortex">water from air<br>
-      via ultrasonic<br>
-      vortex
+      <span class="intro-title-line"><img src="vortex_spectrum.jpg" alt="">water from air<img src="vortex_spectrum.jpg" alt=""></span>
+      <span class="intro-title-line"><img src="vortex_spectrum.jpg" alt="">via ultrasonic<img src="vortex_spectrum.jpg" alt=""></span>
+      <span class="intro-title-line"><img src="vortex_spectrum.jpg" alt="">vortex<img src="vortex_spectrum.jpg" alt=""></span>
     </h1>
     <p class="intro-lead">Human beings all over the planet, by the millions, suffer from water shortages or grave water quality issues — yet above and all around us we are surrounded by tons of invisible water vapor that has just been waiting for the right human beings to come along and unlock its potential torrential downpour. We believe that solution is our <strong>Aqua-duct water-from-air solution</strong>.</p>
 
-    <figure>
-      <div class="img-placeholder img-placeholder-dark">
-        📷 [Reference image: Aqueduct unit or hydrogel macro shot]
-      </div>
-    </figure>
+    <div class="img-placeholder img-placeholder-dark">
+      📷 [Reference image: Aqueduct unit or hydrogel macro shot]
+    </div>
 
     <p class="intro-body">Its macroporous calcium chloride hydrogel drinks water vapor from the air like the thirsty sponge that it is. After <strong>15 minutes</strong>, the membrane becomes saturated and switches to its desorption mode, releasing the water in <strong>under 2 minutes</strong>. Total sorption/desorption cycle time for this macroporous 2 mm, 2 meter by 2 meter hydrogel is just <strong>15 minutes</strong> (at a typical 75% relative humidity), completing this cycle <strong>96 times per day</strong>. That is how it produces massive amounts of water — that, and ultrasound-assisted acoustic streaming, its innovative macroporous design, and the forced-convection cross-flow the system comes equipped with.</p>
 
@@ -433,11 +408,9 @@
       <strong>Massachusetts Institute of Technology (MIT).</strong> The study by Shuvo et al., published in <em>Nature Communications</em> (November 2025), established that ultrasonic excitation at controlled frequencies releases absorbed water with a fraction of the energy required by thermal desorption. We use their conceptual framework as the basis of our extraction subsystem (Component 03).
     </div>
 
-    <figure>
-      <div class="img-placeholder">
-        📷 [Reference image: PAM-CaCl₂ hydrogel chemical structure or SEM micrograph of the macroporous network]
-      </div>
-    </figure>
+    <div class="img-placeholder">
+      📷 [Reference image: PAM-CaCl₂ hydrogel chemical structure or SEM micrograph of the macroporous network]
+    </div>
 
     <p>The PAM-LiCl hydrogel is <strong>non-toxic</strong>. Polyacrylamide is inert once crosslinked, and calcium chloride is a safe salt used in medical, food, and water-treatment applications. At end of life, the spent gel can be disposed of as general waste or composted: all salts are fully water-soluble.</p>
 
@@ -459,11 +432,9 @@
 
     <p>The practical result: sorption times drop from hours to <strong>minutes</strong>. Instead of a saturated outer layer blocking access to the interior, the entire gel volume contributes to the cycle. This is what enables a 15-minute full cycle and 96 cycles per day.</p>
 
-    <figure>
-      <div class="img-placeholder">
-        📷 [Reference image: side-by-side comparison of dense vs macroporous hydrogel, or SEM of the porous network]
-      </div>
-    </figure>
+    <div class="img-placeholder">
+      📷 [Reference image: side-by-side comparison of dense vs macroporous hydrogel, or SEM of the porous network]
+    </div>
 
     </div>
   </div>
@@ -491,11 +462,9 @@
 
     <p>Our use of acoustic streaming is therefore in line with accepted and well-established engineering practice. The transducer (PZT-5H or PZT-8) and the aluminum sonotrode are standard components of the industrial ultrasonic ecosystem, manufactured by suppliers with decades of history in medical, cleaning, and manufacturing applications.</p>
 
-    <figure>
-      <div class="img-placeholder">
-        📷 [Reference image: ultrasonic cleaning tank in operation or industrial sonotrode]
-      </div>
-    </figure>
+    <div class="img-placeholder">
+      📷 [Reference image: ultrasonic cleaning tank in operation or industrial sonotrode]
+    </div>
 
     </div>
   </div>
@@ -517,11 +486,9 @@
 
     <p><strong>Automatic resonance tuning.</strong> The actual resonant frequency of a 2 × 2 meter aluminum plate changes with temperature, gel load, and wear. An automatic control circuit continuously tracks the real resonance of the plate-transducer assembly and adjusts the drive signal to hold it. Performance stays stable across the equipment's operating life.</p>
 
-    <figure>
-      <div class="img-placeholder img-placeholder-dark">
-        📷 [Reference image: aluminum sonotrode or PZT piezoelectric transducer]
-      </div>
-    </figure>
+    <div class="img-placeholder img-placeholder-dark">
+      📷 [Reference image: aluminum sonotrode or PZT piezoelectric transducer]
+    </div>
 
     </div>
   </div>
@@ -535,64 +502,15 @@
 
     <p>Conventional atmospheric generation works by <em>refrigeration and condensation</em>: a compressor cools a surface below the dew point, vapor condenses onto it, and the water is collected. It is a technology more than a century old, and it carries its problems: it depends on compressors, refrigerants, and a thermal differential that only exists when humidity is high.</p>
 
-    <table class="comparison">
-      <thead>
-        <tr>
-          <th>Criterion</th>
-          <th>Conventional (Compressor)</th>
-          <th>Aquasonica (Ultrasonic)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Minimum viable humidity</td>
-          <td class="bad">50–60% RH typical. Below that, produces essentially nothing.</td>
-          <td class="good">25% RH. Maintains useful output in dry ranges.</td>
-        </tr>
-        <tr>
-          <td>Electrical draw</td>
-          <td class="bad">1,500–4,000 W per commercial unit.</td>
-          <td class="good">~130 W average total.</td>
-        </tr>
-        <tr>
-          <td>Specific energy</td>
-          <td class="bad">1.5–3 kWh per liter.</td>
-          <td class="good">0.3–0.8 kWh per liter.</td>
-        </tr>
-        <tr>
-          <td>Refrigerants</td>
-          <td class="bad">Yes — high-GWP gases.</td>
-          <td class="good">None.</td>
-        </tr>
-        <tr>
-          <td>Compressor</td>
-          <td class="bad">Yes — high-wear component, frequent maintenance.</td>
-          <td class="good">None.</td>
-        </tr>
-        <tr>
-          <td>Typical equipment price</td>
-          <td class="bad">US$15,000–60,000 for comparable capacities.</td>
-          <td class="good"><strong>5× to 10× cheaper.</strong></td>
-        </tr>
-        <tr>
-          <td>Maintenance</td>
-          <td class="bad">Compressor, refrigerant, filters, complex sanitization.</td>
-          <td class="good">Ultrasonic grease every 2–3 months; renewable hydrogel every 12–18 months. No specialist technicians.</td>
-        </tr>
-        <tr>
-          <td>Solar compatibility</td>
-          <td class="bad">Requires large, costly solar array (~2–4 kW).</td>
-          <td class="good">~500 Wp array plus battery.</td>
-        </tr>
-        <tr>
-          <td>Consumable nature</td>
-          <td class="bad">Refrigerant, compressor, filters — costly and require certified technician.</td>
-          <td class="good">Only the hydrogel — US$10–15 per 4 m² batch. On-site replacement.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="chart-container">
+      <canvas id="comparisonChartEn"></canvas>
+    </div>
 
     <p>The cost differential is not marginal: it is <strong>an order of magnitude</strong>. A conventional atmospheric generator costs between US$15,000 and US$60,000 for capacity comparable to an Aqueduct Model. Our system installs with integrated solar power, draws a fraction of the electricity, and its only real consumable costs less than an automobile oil change.</p>
+
+    <p style="margin-top:1.5rem;font-size:0.85rem;color:var(--gray);">
+      <strong>Note on metrics:</strong> Electrical draw, specific energy, and price figures are typical ranges published by commercial atmospheric generator manufacturers. For direct comparison, the Aqueduct Model is evaluated against a conventional unit of similar capacity (~400 L/day). Aquasonica pricing is pending confirmation for the Colombian market.
+    </p>
 
     </div>
   </div>
@@ -689,6 +607,84 @@
 
 </div>
 
+<script>
+// Chart.js comparison chart
+function initChart(canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  const labels = ['Humedad mín. viable (%)', 'Consumo eléctrico (W)', 'Energía específica (kWh/L)', 'Precio relativo (×)'];
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Convencional',
+          data: [55, 2500, 2.2, 1],
+          backgroundColor: 'rgba(239, 68, 68, 0.7)',
+          borderColor: 'rgba(239, 68, 68, 1)',
+          borderWidth: 1.5,
+          borderRadius: 6,
+        },
+        {
+          label: 'Aquasonica',
+          data: [25, 130, 0.55, 0.1],
+          backgroundColor: 'rgba(0, 212, 255, 0.7)',
+          borderColor: 'rgba(0, 212, 255, 1)',
+          borderWidth: 1.5,
+          borderRadius: 6,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: '#dbeafe', font: { size: 13, weight: '600' }, padding: 16 }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(10,25,41,0.95)',
+          titleColor: '#7dd3fc',
+          bodyColor: '#dbeafe',
+          borderColor: 'rgba(0,212,255,0.3)',
+          borderWidth: 1,
+          padding: 12,
+          callbacks: {
+            label: function(context) {
+              let suffix = '';
+              if (context.dataIndex === 0) suffix = '%';
+              else if (context.dataIndex === 1) suffix = ' W';
+              else if (context.dataIndex === 2) suffix = ' kWh/L';
+              else suffix = '×';
+              return context.dataset.label + ': ' + context.parsed.y + suffix;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#a5c9e0', font: { size: 11 }, maxRotation: 0 },
+          grid: { color: 'rgba(125,211,252,0.08)' }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#a5c9e0', font: { size: 11 } },
+          grid: { color: 'rgba(125,211,252,0.08)' }
+        }
+      },
+      barPercentage: 0.65,
+      categoryPercentage: 0.7,
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initChart('comparisonChart');
+  initChart('comparisonChartEn');
+});
+</script>
+
 <script src="script.js"></script>
 </body>
-</html>
+      </html>
